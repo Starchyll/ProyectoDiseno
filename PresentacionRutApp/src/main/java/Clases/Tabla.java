@@ -17,6 +17,10 @@ public class Tabla implements ITabla{
     
     
 
+    /**
+     * Método que llena una tabla con un arreglo de objetos con los datos de una compra.
+     * @return 
+     */
     @Override
     public Object[][] llenarTabla() {
         
