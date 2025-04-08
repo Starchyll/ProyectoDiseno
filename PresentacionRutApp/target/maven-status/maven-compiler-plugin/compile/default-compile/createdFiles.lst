@@ -21,6 +21,7 @@ Frames\MainMenu$2.class
 DTOs\MonederoDTO.class
 Frames\MainMenu$7.class
 Frames\AsientosDisponibles$1.class
+Frames\ViajesDisponibles$3.class
 DTOs\ViajeDTO.class
 Frames\ViajesDisponibles$1.class
 Frames\BuscarViaje$3.class

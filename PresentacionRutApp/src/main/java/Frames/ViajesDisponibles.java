@@ -18,7 +18,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ViajesDisponibles extends javax.swing.JFrame {
 
-
     private List<ViajeDTO> datos = ControlNegocio.getInstancia().obtenerListaViajes();
     DefaultTableModel mt = new DefaultTableModel();
 
@@ -39,6 +38,7 @@ public class ViajesDisponibles extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) tblViajes.getModel();
         modelo.setRowCount(0);
 
+        // Agregar los datos a la tabla
         for (ViajeDTO viaje : datos) {
             modelo.addRow(new Object[]{
                 viaje.getIdCamion(),
@@ -49,6 +49,17 @@ public class ViajesDisponibles extends javax.swing.JFrame {
                 "Comprar"
             });
         }
+
+        // Hacer que las columnas no sean redimensionables
+        for (int i = 0; i < tblViajes.getColumnCount(); i++) {
+            tblViajes.getColumnModel().getColumn(i).setResizable(false);
+        }
+
+        // Deshabilitar mover columnas
+        tblViajes.getTableHeader().setReorderingAllowed(false);
+
+        // Hacer que la tabla no sea editable
+        tblViajes.setDefaultEditor(Object.class, null);
     }
 
     /**
@@ -143,8 +154,22 @@ public class ViajesDisponibles extends javax.swing.JFrame {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblViajes);
+        if (tblViajes.getColumnModel().getColumnCount() > 0) {
+            tblViajes.getColumnModel().getColumn(0).setResizable(false);
+            tblViajes.getColumnModel().getColumn(1).setResizable(false);
+            tblViajes.getColumnModel().getColumn(2).setResizable(false);
+            tblViajes.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         BackGround.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 460, 110));
 
