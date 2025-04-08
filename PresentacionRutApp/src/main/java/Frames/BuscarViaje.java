@@ -5,6 +5,8 @@
 package Frames;
 
 import Control.CordinadorPresentacion;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -194,11 +196,23 @@ public class BuscarViaje extends javax.swing.JFrame {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         if (BoxOrigen.getSelectedIndex() == 0 && BoxDestino.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(this, "Favor de seleccionar origen y destino para continuar");
-        } else if (Calendario.getCalendar() == null) {
-            JOptionPane.showMessageDialog(this, "indique una fecha");
         } else {
-            CordinadorPresentacion.getInstancia().abrirViajesDisponibles();
-            this.dispose();
+            java.util.Calendar calendar = Calendario.getCalendar();
+            if (calendar == null) {
+                JOptionPane.showMessageDialog(this, "Por favor seleccione una fecha.");
+                return;
+            }
+
+            java.util.Date fecha = calendar.getTime(); // Obtener la fecha como Date
+
+            // Si necesitas convertir la fecha a LocalDate
+            LocalDate localDate = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+            String origen = BoxOrigen.getSelectedItem().toString();
+            String destino = BoxDestino.getSelectedItem().toString();
+
+            CordinadorPresentacion.getInstancia().mostrarViajesDisponibles(origen, destino, localDate);
+            dispose(); // Cerrar la ventana actual
         }
 
     }//GEN-LAST:event_btnBuscarActionPerformed

@@ -7,6 +7,7 @@ package Control;
 import Frames.BuscarViaje;
 import Frames.MainMenu;
 import Frames.ViajesDisponibles;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -50,6 +51,13 @@ public class CordinadorPresentacion {
 
     public List<String> buscarDestinosDisponibles(String origen) {
         return ControlNegocio.getInstancia().obtenerDestinosDisponibles(origen);
+    }
+
+    public void mostrarViajesDisponibles(String origen, String destino, LocalDate fecha) {
+        String[][] viajes = ControlNegocio.getInstancia().obtenerViajesDisponibles(origen, destino, fecha);
+        ViajesDisponibles ventana = new ViajesDisponibles();
+        ventana.cargarViajesEnTabla(viajes);
+        ventana.setVisible(true);
     }
 
 }

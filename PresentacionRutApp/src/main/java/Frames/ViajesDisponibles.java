@@ -22,8 +22,21 @@ public class ViajesDisponibles extends javax.swing.JFrame {
         String ids [] = {"Numero", "Origen", "Destino", "Duracion", "Precio", ""};
         mt.setColumnIdentifiers(ids);
         tblViajes.setModel(mt);
+        cargarViajesEnTabla();
         
     }
+    
+    public void cargarViajesEnTabla(String[][] datos) {
+    DefaultTableModel modelo = (DefaultTableModel) tblViajes.getModel();
+    modelo.setRowCount(0); // Limpiar
+
+    for (String[] viaje : datos) {
+        modelo.addRow(new Object[]{
+            viaje[0], viaje[1], viaje[2], viaje[3], viaje[4], "Comprar"
+        });
+    }
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -60,7 +73,7 @@ public class ViajesDisponibles extends javax.swing.JFrame {
         HeaderLayout.setHorizontalGroup(
             HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HeaderLayout.createSequentialGroup()
-                .addContainerGap(176, Short.MAX_VALUE)
+                .addContainerGap(161, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(164, 164, 164))
         );
@@ -68,10 +81,10 @@ public class ViajesDisponibles extends javax.swing.JFrame {
             HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HeaderLayout.createSequentialGroup()
                 .addComponent(jLabel1)
-                .addGap(0, 3, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        BackGround.add(Header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 510, -1));
+        BackGround.add(Header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, -1));
 
         Footer.setBackground(new java.awt.Color(255, 201, 98));
         Footer.setPreferredSize(new java.awt.Dimension(520, 60));
@@ -79,7 +92,6 @@ public class ViajesDisponibles extends javax.swing.JFrame {
         btnVolver.setBackground(new java.awt.Color(255, 201, 98));
         btnVolver.setFont(new java.awt.Font("Roboto Condensed Black", 1, 13)); // NOI18N
         btnVolver.setForeground(new java.awt.Color(0, 0, 0));
-        btnVolver.setIcon(new javax.swing.ImageIcon("C:\\Users\\mmax2\\Documents\\GitHub\\ProyectoDiseno\\PresentacionRutApp\\src\\main\\java\\img\\FlechaVolver.png")); // NOI18N
         btnVolver.setText("Volver\n");
         btnVolver.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnVolver.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -120,12 +132,6 @@ public class ViajesDisponibles extends javax.swing.JFrame {
             }
         ));
         jScrollPane1.setViewportView(tblViajes);
-        if (tblViajes.getColumnModel().getColumnCount() > 0) {
-            tblViajes.getColumnModel().getColumn(0).setHeaderValue("Title 1");
-            tblViajes.getColumnModel().getColumn(1).setHeaderValue("Title 2");
-            tblViajes.getColumnModel().getColumn(2).setHeaderValue("Title 3");
-            tblViajes.getColumnModel().getColumn(3).setHeaderValue("Title 4");
-        }
 
         BackGround.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 460, 110));
 

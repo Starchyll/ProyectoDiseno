@@ -11,6 +11,7 @@ Frames\AsientosDisponibles.class
 Frames\MainMenu$5.class
 Frames\MainMenu.class
 Control\CordinadorPresentacion.class
+DTOs\CamionDTO.class
 Frames\MainMenu$9.class
 Clases\Tabla.class
 Frames\BuscarViaje$5.class

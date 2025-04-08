@@ -4,6 +4,7 @@
  */
 package Control;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
@@ -38,13 +39,22 @@ public class ControlNegocio {
                 return new ArrayList<>();
         }
     }
-    
+
     public List<String> obtenerOrigenesDisponibles() {
         return Arrays.asList("Ciudad A", "Ciudad B", "Ciudad C");
     }
-    
-    public void obtenerViajesDisponibles() {
 
+    public String[][] obtenerViajesDisponibles(String origen, String destino, LocalDate fecha) {
+        if (origen.equals("B") && destino.equals("A")) {
+            return new String[][]{
+                {"L-123", "Cd. Obregon", "Hermosillo", "3h 30min", "$300", "ABC123"},
+                {"L-124", "Cd. Obregon", "Hermosillo", "3h 30min", "$300", "DEF456"},
+                {"L-125", "Cd. Obregon", "Hermosillo", "3h 30min", "$300", "GHI789"}
+            };
+        }
+
+        // Si no hay coincidencias, regresa arreglo vacío
+        return new String[0][];
     }
 
     public void comprarBoleto() {
@@ -78,8 +88,6 @@ public class ControlNegocio {
 //    public void obtenerDestinosDisponibles() {
 //
 //    }
-
-
     public void obtenerMetodoPago() {
 
     }
