@@ -15,6 +15,11 @@ public class ComprarBoleto extends javax.swing.JFrame {
      */
     public ComprarBoleto() {
         initComponents();
+        this.panelTarjeta.setVisible(false);
+
+        buttonGroup1.add(botonPagarMonedero);
+        buttonGroup1.add(botonPagarTarjeta);
+
     }
 
     /**
@@ -26,10 +31,24 @@ public class ComprarBoleto extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         BackGround = new javax.swing.JPanel();
         Header = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         Footer = new javax.swing.JPanel();
+        botonPagarMonedero = new javax.swing.JRadioButton();
+        botonPagarTarjeta = new javax.swing.JRadioButton();
+        panelTarjeta = new javax.swing.JPanel();
+        campoNumeroTarjeta = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        campoNombreTitular = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        campoNombreTitular1 = new javax.swing.JTextField();
+        campoNombreTitular2 = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        btnCompraViaje = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -57,7 +76,7 @@ public class ComprarBoleto extends javax.swing.JFrame {
             HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HeaderLayout.createSequentialGroup()
                 .addComponent(jLabel1)
-                .addGap(0, 3, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         BackGround.add(Header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, -1));
@@ -78,6 +97,92 @@ public class ComprarBoleto extends javax.swing.JFrame {
 
         BackGround.add(Footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 490, 500, -1));
 
+        botonPagarMonedero.setText("Usar monedero");
+        botonPagarMonedero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonPagarMonederoActionPerformed(evt);
+            }
+        });
+        BackGround.add(botonPagarMonedero, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, -1));
+
+        botonPagarTarjeta.setText("Usar tarjeta");
+        botonPagarTarjeta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonPagarTarjetaActionPerformed(evt);
+            }
+        });
+        BackGround.add(botonPagarTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, -1));
+
+        panelTarjeta.setBackground(new java.awt.Color(255, 255, 255));
+        panelTarjeta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel2.setText("Numero de tarjeta");
+
+        jLabel3.setText("Nombtre titular");
+
+        jLabel4.setText("Vencimiento");
+
+        jLabel5.setText("CVV");
+
+        javax.swing.GroupLayout panelTarjetaLayout = new javax.swing.GroupLayout(panelTarjeta);
+        panelTarjeta.setLayout(panelTarjetaLayout);
+        panelTarjetaLayout.setHorizontalGroup(
+            panelTarjetaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTarjetaLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(panelTarjetaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoNumeroTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelTarjetaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelTarjetaLayout.createSequentialGroup()
+                            .addGroup(panelTarjetaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(campoNombreTitular1, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE))
+                            .addGap(83, 83, 83)
+                            .addGroup(panelTarjetaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(campoNombreTitular2)
+                                .addGroup(panelTarjetaLayout.createSequentialGroup()
+                                    .addComponent(jLabel5)
+                                    .addGap(0, 0, Short.MAX_VALUE))))
+                        .addComponent(campoNombreTitular, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(55, Short.MAX_VALUE))
+        );
+        panelTarjetaLayout.setVerticalGroup(
+            panelTarjetaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTarjetaLayout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(campoNumeroTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(campoNombreTitular, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(panelTarjetaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelTarjetaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(campoNombreTitular1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoNombreTitular2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+
+        BackGround.add(panelTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 410, 240));
+
+        btnCompraViaje.setBackground(new java.awt.Color(47, 40, 34));
+        btnCompraViaje.setFont(new java.awt.Font("Roboto Condensed Black", 1, 13)); // NOI18N
+        btnCompraViaje.setForeground(new java.awt.Color(255, 255, 255));
+        btnCompraViaje.setText("COMPRAR");
+        btnCompraViaje.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCompraViajeActionPerformed(evt);
+            }
+        });
+        BackGround.add(btnCompraViaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 450, 110, 40));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -91,6 +196,18 @@ public class ComprarBoleto extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void botonPagarTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPagarTarjetaActionPerformed
+        this.panelTarjeta.setVisible(true);
+    }//GEN-LAST:event_botonPagarTarjetaActionPerformed
+
+    private void botonPagarMonederoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPagarMonederoActionPerformed
+        this.panelTarjeta.setVisible(false);
+    }//GEN-LAST:event_botonPagarMonederoActionPerformed
+
+    private void btnCompraViajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompraViajeActionPerformed
+       
+    }//GEN-LAST:event_btnCompraViajeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -138,6 +255,20 @@ public class ComprarBoleto extends javax.swing.JFrame {
     private javax.swing.JPanel BackGround;
     private javax.swing.JPanel Footer;
     private javax.swing.JPanel Header;
+    private javax.swing.JRadioButton botonPagarMonedero;
+    private javax.swing.JRadioButton botonPagarTarjeta;
+    private javax.swing.JButton btnCompraViaje;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JTextField campoNombreTitular;
+    private javax.swing.JTextField campoNombreTitular1;
+    private javax.swing.JTextField campoNombreTitular2;
+    private javax.swing.JTextField campoNumeroTarjeta;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel panelTarjeta;
     // End of variables declaration//GEN-END:variables
 }
