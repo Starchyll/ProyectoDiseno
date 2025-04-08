@@ -4,7 +4,7 @@ import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-
+import Control.CordinadorPresentacion;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -74,13 +74,13 @@ public class MainMenu extends javax.swing.JFrame {
             .addGroup(HeaderLayout.createSequentialGroup()
                 .addGap(168, 168, 168)
                 .addComponent(eName)
-                .addContainerGap(182, Short.MAX_VALUE))
+                .addContainerGap(157, Short.MAX_VALUE))
         );
         HeaderLayout.setVerticalGroup(
             HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HeaderLayout.createSequentialGroup()
                 .addComponent(eName)
-                .addGap(0, 3, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         BackGround.add(Header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 60));
@@ -91,11 +91,11 @@ public class MainMenu extends javax.swing.JFrame {
         Footer.setLayout(FooterLayout);
         FooterLayout.setHorizontalGroup(
             FooterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 520, Short.MAX_VALUE)
         );
         FooterLayout.setVerticalGroup(
             FooterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 70, Short.MAX_VALUE)
         );
 
         BackGround.add(Footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 490, 520, 70));
@@ -243,8 +243,7 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMisBoletosActionPerformed
 
     private void btnCompraViajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompraViajeActionPerformed
-        BuscarViaje buscarViaje = new BuscarViaje();
-        buscarViaje.setVisible(true);
+        CordinadorPresentacion.getInstancia().abrirBusquedaViaje();
         this.dispose();
     }//GEN-LAST:event_btnCompraViajeActionPerformed
 
@@ -296,6 +295,7 @@ public class MainMenu extends javax.swing.JFrame {
         lbl.setIcon(this.icono);
         this.repaint();
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BackGround;

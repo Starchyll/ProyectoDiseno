@@ -4,6 +4,8 @@
  */
 package Frames;
 
+import Control.CordinadorPresentacion;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,6 +19,20 @@ public class BuscarViaje extends javax.swing.JFrame {
      */
     public BuscarViaje() {
         initComponents();
+        cargarOrigenes();
+
+    }
+
+    private void cargarOrigenes() {
+        List<String> origenes = CordinadorPresentacion.getInstancia().buscarOrigenesDisponibles();
+
+        BoxOrigen.removeAllItems();
+        for (String origen : origenes) {
+            BoxOrigen.addItem(origen);
+        }
+
+        // Desactivar destino hasta que se seleccione un origen
+        BoxDestino.setEnabled(false);
     }
 
     /**
@@ -151,24 +167,40 @@ public class BuscarViaje extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BoxDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoxDestinoActionPerformed
-        // TODO add your handling code here:
+
+
     }//GEN-LAST:event_BoxDestinoActionPerformed
 
     private void BoxOrigenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoxOrigenActionPerformed
         // TODO add your handling code here:
+        String origenSeleccionado = (String) BoxOrigen.getSelectedItem();
+
+        if (origenSeleccionado != null && !origenSeleccionado.isEmpty()) {
+            List<String> destinos = CordinadorPresentacion.getInstancia().buscarDestinosDisponibles(origenSeleccionado);
+
+            BoxDestino.removeAllItems();
+            for (String destino : destinos) {
+                BoxDestino.addItem(destino);
+            }
+
+            BoxDestino.setEnabled(true);
+        } else {
+            BoxDestino.removeAllItems();
+            BoxDestino.setEnabled(false);
+        }
+
     }//GEN-LAST:event_BoxOrigenActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        if(BoxOrigen.getSelectedIndex() == 0 && BoxDestino.getSelectedIndex() == 0){
+        if (BoxOrigen.getSelectedIndex() == 0 && BoxDestino.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(this, "Favor de seleccionar origen y destino para continuar");
-        } else if(Calendario.getCalendar() == null) {
+        } else if (Calendario.getCalendar() == null) {
             JOptionPane.showMessageDialog(this, "indique una fecha");
-        }else {
-            ViajesDisponibles vjD = new ViajesDisponibles();
-            vjD.setVisible(true);
+        } else {
+            CordinadorPresentacion.getInstancia().abrirViajesDisponibles();
             this.dispose();
         }
-        
+
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed

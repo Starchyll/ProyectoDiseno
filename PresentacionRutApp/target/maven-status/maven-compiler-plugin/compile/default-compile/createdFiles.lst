@@ -2,12 +2,17 @@ Frames\InicioSesion.class
 Frames\BuscarViaje$2.class
 Frames\ViajesDisponibles$2.class
 Frames\ResumenCompra$1.class
+Interfaces\ITabla.class
+Clases\Tabla$1.class
 Frames\ViajesDisponibles.class
 Frames\ResumenCompra.class
+Frames\SistemaRutaApp.class
 Frames\AsientosDisponibles.class
 Frames\MainMenu$5.class
 Frames\MainMenu.class
+Control\CordinadorPresentacion.class
 Frames\MainMenu$9.class
+Clases\Tabla.class
 Frames\BuscarViaje$5.class
 Frames\MainMenu$2.class
 Frames\MainMenu$7.class
@@ -21,7 +26,9 @@ Frames\MainMenu$1.class
 Frames\MainMenu$4.class
 Frames\InicioSesion$1.class
 Frames\BuscarViaje.class
+Clases\Render.class
 Frames\MainMenu$8.class
 Frames\ComprarBoleto$1.class
 Frames\BuscarViaje$4.class
+Control\ControlNegocio.class
 Frames\MainMenu$3.class
