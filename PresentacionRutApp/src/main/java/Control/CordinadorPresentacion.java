@@ -4,6 +4,8 @@
  */
 package Control;
 
+import DTOs.CamionDTO;
+import DTOs.ViajeDTO;
 import Frames.BuscarViaje;
 import Frames.MainMenu;
 import Frames.ViajesDisponibles;
@@ -54,9 +56,9 @@ public class CordinadorPresentacion {
     }
 
     public void mostrarViajesDisponibles(String origen, String destino, LocalDate fecha) {
-        String[][] viajes = ControlNegocio.getInstancia().obtenerViajesDisponibles(origen, destino, fecha);
+        List<ViajeDTO> datos = ControlNegocio.getInstancia().obtenerListaViajes();
         ViajesDisponibles ventana = new ViajesDisponibles();
-        ventana.cargarViajesEnTabla(viajes);
+        ventana.cargarViajesEnTabla(datos);
         ventana.setVisible(true);
     }
 

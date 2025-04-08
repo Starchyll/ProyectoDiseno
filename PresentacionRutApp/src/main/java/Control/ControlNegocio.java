@@ -4,6 +4,7 @@
  */
 package Control;
 
+import DTOs.ViajeDTO;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +43,19 @@ public class ControlNegocio {
 
     public List<String> obtenerOrigenesDisponibles() {
         return Arrays.asList("Ciudad A", "Ciudad B", "Ciudad C");
+    }
+
+    public List<ViajeDTO> obtenerListaViajes() {
+        List<ViajeDTO> viajes = new ArrayList<>();
+        ViajeDTO viaje1 = new ViajeDTO(1L, 300.0, "Cd. Obregón", "Hermosillo", "3h 30min", 1L);
+        ViajeDTO viaje2 = new ViajeDTO(2L, 300.0, "Cd. Obregón", "Hermosillo", "3h 30min", 2L);
+        ViajeDTO viaje3 = new ViajeDTO(3L, 300.0, "Hermosillo", "Navojoa", "3h 30min", 1L);
+
+        viajes.add(viaje1);
+        viajes.add(viaje2);
+        viajes.add(viaje3);
+        return viajes;
+
     }
 
     public String[][] obtenerViajesDisponibles(String origen, String destino, LocalDate fecha) {

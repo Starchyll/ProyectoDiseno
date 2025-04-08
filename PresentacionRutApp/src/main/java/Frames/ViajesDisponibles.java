@@ -4,6 +4,12 @@
  */
 package Frames;
 
+import Control.ControlNegocio;
+import Control.CordinadorPresentacion;
+import DTOs.ViajeDTO;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -11,7 +17,9 @@ import javax.swing.table.DefaultTableModel;
  * @author mmax2
  */
 public class ViajesDisponibles extends javax.swing.JFrame {
-    
+
+
+    private List<ViajeDTO> datos = ControlNegocio.getInstancia().obtenerListaViajes();
     DefaultTableModel mt = new DefaultTableModel();
 
     /**
@@ -19,24 +27,29 @@ public class ViajesDisponibles extends javax.swing.JFrame {
      */
     public ViajesDisponibles() {
         initComponents();
-        String ids [] = {"Numero", "Origen", "Destino", "Duracion", "Precio", ""};
+        String ids[] = {"Numero", "Origen", "Destino", "Duracion", "Precio", ""};
         mt.setColumnIdentifiers(ids);
         tblViajes.setModel(mt);
-        cargarViajesEnTabla();
-        
-    }
-    
-    public void cargarViajesEnTabla(String[][] datos) {
-    DefaultTableModel modelo = (DefaultTableModel) tblViajes.getModel();
-    modelo.setRowCount(0); // Limpiar
 
-    for (String[] viaje : datos) {
-        modelo.addRow(new Object[]{
-            viaje[0], viaje[1], viaje[2], viaje[3], viaje[4], "Comprar"
-        });
-    }
-}
+        cargarViajesEnTabla(this.datos);
 
+    }
+
+    public void cargarViajesEnTabla(List<ViajeDTO> datos) {
+        DefaultTableModel modelo = (DefaultTableModel) tblViajes.getModel();
+        modelo.setRowCount(0);
+
+        for (ViajeDTO viaje : datos) {
+            modelo.addRow(new Object[]{
+                viaje.getIdCamion(),
+                viaje.getOrigen(),
+                viaje.getDestino(),
+                viaje.getDuracion(),
+                viaje.getPrecio(),
+                "Comprar"
+            });
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

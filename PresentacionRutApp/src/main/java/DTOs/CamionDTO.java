@@ -1,14 +1,33 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DTOs;
+
+import java.util.List;
 
 /**
  *
  * @author chris
  */
 public class CamionDTO {
+    private Long idCamion;
     private String matricula;
-    //private 
+    private List<AsientoDTO> listaAsiento;
+
+    public CamionDTO(Long idCamion, String matricula, List<AsientoDTO> listaAsiento) {
+        this.idCamion = idCamion;
+        this.matricula = matricula;
+        this.listaAsiento = listaAsiento;
+    }
+
+    public Long getIdCamion() {
+        return idCamion;
+    }
+
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public List<AsientoDTO> getListaAsiento() {
+        return listaAsiento;
+    }
+    
+    
 }

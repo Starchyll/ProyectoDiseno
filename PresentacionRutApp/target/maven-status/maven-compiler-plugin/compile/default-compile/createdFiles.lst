@@ -1,3 +1,4 @@
+DTOs\AsientoDTO.class
 Frames\InicioSesion.class
 Frames\BuscarViaje$2.class
 Frames\ViajesDisponibles$2.class
@@ -15,9 +16,12 @@ DTOs\CamionDTO.class
 Frames\MainMenu$9.class
 Clases\Tabla.class
 Frames\BuscarViaje$5.class
+DTOs\RutaDTO.class
 Frames\MainMenu$2.class
+DTOs\MonederoDTO.class
 Frames\MainMenu$7.class
 Frames\AsientosDisponibles$1.class
+DTOs\ViajeDTO.class
 Frames\ViajesDisponibles$1.class
 Frames\BuscarViaje$3.class
 Frames\ComprarBoleto.class
@@ -26,9 +30,13 @@ Frames\MainMenu$6.class
 Frames\MainMenu$1.class
 Frames\MainMenu$4.class
 Frames\InicioSesion$1.class
+DTOs\UsuarioDTO.class
 Frames\BuscarViaje.class
 Clases\Render.class
+DTOs\DetallesPagoDTO.class
 Frames\MainMenu$8.class
+DTOs\ParadaDTO.class
+DTOs\BoletoDTO.class
 Frames\ComprarBoleto$1.class
 Frames\BuscarViaje$4.class
 Control\ControlNegocio.class
