@@ -7,9 +7,16 @@ package Frames;
 import Control.ControlNegocio;
 import Control.CordinadorPresentacion;
 import DTOs.ViajeDTO;
+import java.awt.HeadlessException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -89,7 +96,6 @@ public class ViajesDisponibles extends javax.swing.JFrame {
         Header.setPreferredSize(new java.awt.Dimension(520, 60));
 
         jLabel1.setFont(new java.awt.Font("Roboto Condensed Medium", 1, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("RUTAPP");
 
         javax.swing.GroupLayout HeaderLayout = new javax.swing.GroupLayout(Header);
@@ -115,7 +121,6 @@ public class ViajesDisponibles extends javax.swing.JFrame {
 
         btnVolver.setBackground(new java.awt.Color(255, 201, 98));
         btnVolver.setFont(new java.awt.Font("Roboto Condensed Black", 1, 13)); // NOI18N
-        btnVolver.setForeground(new java.awt.Color(0, 0, 0));
         btnVolver.setText("Volver\n");
         btnVolver.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnVolver.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -163,6 +168,11 @@ public class ViajesDisponibles extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblViajes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblViajesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblViajes);
         if (tblViajes.getColumnModel().getColumnCount() > 0) {
             tblViajes.getColumnModel().getColumn(0).setResizable(false);
@@ -192,6 +202,45 @@ public class ViajesDisponibles extends javax.swing.JFrame {
         srcT.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
+
+    public ViajesDisponibles(JPanel BackGround, JPanel Footer, JPanel Header, JButton btnVolver, JLabel jLabel1, JScrollPane jScrollPane1, JTable tblViajes) throws HeadlessException {
+        this.BackGround = BackGround;
+        this.Footer = Footer;
+        this.Header = Header;
+        this.btnVolver = btnVolver;
+        this.jLabel1 = jLabel1;
+        this.jScrollPane1 = jScrollPane1;
+        this.tblViajes = tblViajes;
+    }
+
+    private void tblViajesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblViajesMouseClicked
+        // Obtener la fila y columna donde se hizo clic
+        int row = tblViajes.rowAtPoint(evt.getPoint());
+        int col = tblViajes.columnAtPoint(evt.getPoint());
+
+        // Verificar si la columna es la 6 columna (índice 5)
+        if (col == 5) {
+            // Obtener los datos de esa fila y columna
+
+            Object idCamion = tblViajes.getValueAt(row, 0);
+            Object origen = tblViajes.getValueAt(row, 1);
+            Object destino = tblViajes.getValueAt(row, 2);
+            Object duracion = tblViajes.getValueAt(row, 3);
+            Object precio = tblViajes.getValueAt(row, 4);
+
+            StringBuilder texto = new StringBuilder();
+            texto.append("ID Camión: ").append(idCamion).append("\n")
+                    .append("Origen: ").append(origen).append("\n")
+                    .append("Destino: ").append(destino).append("\n")
+                    .append("Duración: ").append(duracion).append("\n")
+                    .append("Precio: ").append(precio);
+
+// Mostrar el mensaje en un JOptionPane
+            JOptionPane.showMessageDialog(this, texto.toString());
+            CordinadorPresentacion.getInstancia().abrirAsientosDisponibles();
+            this.dispose();
+        }
+    }//GEN-LAST:event_tblViajesMouseClicked
 
     /**
      * @param args the command line arguments

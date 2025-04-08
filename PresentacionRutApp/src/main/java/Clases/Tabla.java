@@ -28,7 +28,7 @@ public class Tabla implements ITabla{
         btnComprar.setText("COMPRAR");
         Object datos[][] = new Object[6][6];
         for (int i = 0; i <= 5; i++) {
-            datos[i][0] = "Numero" + (i+1);
+            datos[i][0] = "Numero" + (i+1); 
             datos[i][1] = "Origen" + (i+1);
             datos[i][2] = "Destino" + (i+1);
             datos[i][3] = "Duracion" + (i+1);

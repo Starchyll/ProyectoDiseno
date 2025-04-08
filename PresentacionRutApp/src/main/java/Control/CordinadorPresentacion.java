@@ -6,6 +6,7 @@ package Control;
 
 import DTOs.CamionDTO;
 import DTOs.ViajeDTO;
+import Frames.AsientosDisponibles;
 import Frames.BuscarViaje;
 import Frames.MainMenu;
 import Frames.ViajesDisponibles;
@@ -45,6 +46,11 @@ public class CordinadorPresentacion {
     public void abrirViajesDisponibles() {
         ViajesDisponibles forma = new ViajesDisponibles();
         forma.setVisible(true);
+    }
+    
+    public void abrirAsientosDisponibles(){
+        AsientosDisponibles formAsientosDisponibles = new AsientosDisponibles();
+        formAsientosDisponibles.setVisible(true);
     }
 
     public List<String> buscarOrigenesDisponibles() {
