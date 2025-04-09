@@ -4,7 +4,7 @@
  */
 package Frames;
 
-import DTOs.DetallesPagoDTO;
+import itson.rutappdto.DetallesPagoDTO;
 import java.util.List;
 
 /**

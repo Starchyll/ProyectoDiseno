@@ -1,5 +1,6 @@
-package DTOs;
+package itson.rutappdto;
 
+import itson.rutappdto.ParadaDTO;
 import java.util.List;
 
 /**

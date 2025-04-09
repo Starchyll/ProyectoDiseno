@@ -1,4 +1,4 @@
-package DTOs;
+package itson.rutappdto;
 
 import java.time.LocalDate;
 

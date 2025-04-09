@@ -17,6 +17,11 @@
             <version>RELEASE90</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>itson</groupId>
+            <artifactId>RutAppDTO</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

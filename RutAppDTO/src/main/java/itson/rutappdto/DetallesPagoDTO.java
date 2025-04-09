@@ -1,4 +1,6 @@
-package DTOs;
+package itson.rutappdto;
+
+import itson.rutappdto.BoletoDTO;
 
 /**
  *

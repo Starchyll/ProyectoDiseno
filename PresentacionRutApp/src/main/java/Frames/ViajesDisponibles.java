@@ -6,7 +6,7 @@ package Frames;
 
 import Control.ControlNegocio;
 import Control.CordinadorPresentacion;
-import DTOs.ViajeDTO;
+import itson.rutappdto.ViajeDTO;
 import java.awt.HeadlessException;
 import java.time.LocalDate;
 import java.util.ArrayList;

@@ -4,8 +4,8 @@
  */
 package Control;
 
-import DTOs.CamionDTO;
-import DTOs.ViajeDTO;
+import itson.rutappdto.CamionDTO;
+import itson.rutappdto.ViajeDTO;
 import Frames.AsientosDisponibles;
 import Frames.BuscarViaje;
 import Frames.MainMenu;

@@ -4,7 +4,7 @@
  */
 package Control;
 
-import DTOs.ViajeDTO;
+import itson.rutappdto.ViajeDTO;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

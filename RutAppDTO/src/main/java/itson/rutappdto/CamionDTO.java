@@ -1,5 +1,6 @@
-package DTOs;
+package itson.rutappdto;
 
+import itson.rutappdto.AsientoDTO;
 import java.util.List;
 
 /**
