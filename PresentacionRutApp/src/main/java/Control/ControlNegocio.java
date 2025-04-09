@@ -60,7 +60,7 @@ public class ControlNegocio {
     }
 
     public String[][] obtenerViajesDisponibles(String origen, String destino, LocalDate fecha) {
-        IConsultarDisponibilida consultar = new ConsultarDisponibilida();
+        IConsultarDisponibilidad consultar = new ConsultarDisponibilid();
 
         try {
             listaaObtenida = consultar.getViajesDisponibles(origen, destino, fecha
