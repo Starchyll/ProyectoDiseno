@@ -51,6 +51,7 @@ public class CordinadorPresentacion {
     public void abrirAsientosDisponibles(){
         AsientosDisponibles formAsientosDisponibles = new AsientosDisponibles();
         formAsientosDisponibles.setVisible(true);
+        
     }
 
     public List<String> buscarOrigenesDisponibles() {

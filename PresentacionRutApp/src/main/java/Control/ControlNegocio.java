@@ -4,6 +4,9 @@
  */
 package Control;
 
+import Fachada.ComprarBoleto;
+import Interfaz.IComprarBoleto;
+import itson.rutappdto.AsientoDTO;
 import itson.rutappdto.ViajeDTO;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -143,5 +146,11 @@ public class ControlNegocio {
 
     public void registrarDetallesBoleto() {
 
+    }
+    
+    public List<AsientoDTO> obtenerAsientos() {
+        IComprarBoleto comprarBoleto = new ComprarBoleto();
+        
+        return comprarBoleto.mostrarListaAsientos();
     }
 }
