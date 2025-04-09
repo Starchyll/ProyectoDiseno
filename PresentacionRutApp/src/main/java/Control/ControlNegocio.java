@@ -60,19 +60,19 @@ public class ControlNegocio {
     }
 
     public String[][] obtenerViajesDisponibles(String origen, String destino, LocalDate fecha) {
-        IConsultarDisponibilidad consultar = new ConsultarDisponibilid();
-
-        try {
-            listaaObtenida = consultar.getViajesDisponibles(origen, destino, fecha
-        } catch (Exception e) {
-        }
-        if (listaaObtenida) {
-             == null
-        }
-        ){
-            JOptionPane
-        }
-        return listaObtenida;
+//        IConsultarDisponibilidad consultar = new ConsultarDisponibilid();
+//
+//        try {
+//            listaaObtenida = consultar.getViajesDisponibles(origen, destino, fecha
+//        } catch (Exception e) {
+//        }
+//        if (listaaObtenida) {
+//             == null
+//        }
+//        ){
+//            JOptionPane
+//        }
+//        return listaObtenida;
         if (origen.equals("B") && destino.equals("A")) {
             return new String[][]{
                 {"L-123", "Cd. Obregon", "Hermosillo", "3h 30min", "$300", "ABC123"},

@@ -1,6 +1,4 @@
-Frames\ComprarBoleto$2.class
-Frames\ViajesDisponibles$4.class
-Frames\ComprarBoleto$4.class
-Frames\ResumenCompra$3.class
-Frames\ComprarBoleto$3.class
-Frames\ResumenCompra$2.class
+Frames/asientos$1.class
+Frames/asientos.class
+Frames/AsientosDisponibles$2.class
+Frames/AsientosDisponibles$EstadoAsiento.class
