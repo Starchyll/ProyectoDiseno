@@ -74,6 +74,7 @@ public class AsientosDisponibles extends javax.swing.JFrame {
         for (JPanel panel : ocupados) {
             mapaEstadosAsientos.put(panel, EstadoAsiento.OCUPADO);
             panel.setBackground(new Color(153, 0, 0)); // Rojo oscuro
+            //JUANPIIIIII
         }
     }
 
