@@ -116,6 +116,12 @@ public class ComprarBoleto extends javax.swing.JFrame {
         panelTarjeta.setBackground(new java.awt.Color(255, 255, 255));
         panelTarjeta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        campoNumeroTarjeta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoNumeroTarjetaActionPerformed(evt);
+            }
+        });
+
         jLabel2.setText("Numero de tarjeta");
 
         jLabel3.setText("Nombtre titular");
@@ -208,6 +214,10 @@ public class ComprarBoleto extends javax.swing.JFrame {
     private void btnCompraViajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompraViajeActionPerformed
        
     }//GEN-LAST:event_btnCompraViajeActionPerformed
+
+    private void campoNumeroTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNumeroTarjetaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoNumeroTarjetaActionPerformed
 
     /**
      * @param args the command line arguments

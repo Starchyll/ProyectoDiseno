@@ -76,7 +76,7 @@ public class ControlNegocio {
         for (int i = 0; i < 8; i++) {
             contador++;
             CamionDTO camion = new CamionDTO(contador, (i+1)+"a", crearListaAsientos());
-            viajes.add(new ViajeDTO(contador, 300.00, origen, Destino, "3hr 30min", camion, fecha));
+            viajes.add(new ViajeDTO(300.00, origen, Destino, "3hr 30min", camion, fecha));
         }
         return viajes;
     }

@@ -8,7 +8,7 @@ import java.time.LocalDate;
  */
 public class ViajeDTO {
 
-    private Long idViaje;
+    // private Long idViaje; 
     private Double precio;
     private String origen;
     private String destino;
@@ -16,25 +16,13 @@ public class ViajeDTO {
     private CamionDTO camion;
     private LocalDate fecha;
 
-    public ViajeDTO() {
-    }
-
-    public ViajeDTO(Long idViaje, Double precio, String origen, String destino, String duracion, CamionDTO camion, LocalDate fecha) {
-        this.idViaje = idViaje;
+    public ViajeDTO(Double precio, String origen, String destino, String duracion, CamionDTO camion, LocalDate fecha) {
         this.precio = precio;
         this.origen = origen;
         this.destino = destino;
         this.duracion = duracion;
         this.camion = camion;
         this.fecha = fecha;
-    }
-
-    public Long getIdViaje() {
-        return idViaje;
-    }
-
-    public void setIdViaje(Long idViaje) {
-        this.idViaje = idViaje;
     }
 
     public Double getPrecio() {
@@ -77,7 +65,6 @@ public class ViajeDTO {
         this.camion = camion;
     }
 
-  
     public LocalDate getFecha() {
         return fecha;
     }
@@ -85,5 +72,7 @@ public class ViajeDTO {
     public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
+
+    
 
 }

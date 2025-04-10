@@ -11,16 +11,8 @@ public class AsientoDTO {
     private estadoAsiento estado;
     private String numero;
 
-    public AsientoDTO() {
-    }
-
     public AsientoDTO(Long idAsiento, estadoAsiento estado, String numero) {
         this.idAsiento = idAsiento;
-        this.estado = estado;
-        this.numero = numero;
-    }
-
-    public AsientoDTO(estadoAsiento estado, String numero) {
         this.estado = estado;
         this.numero = numero;
     }
@@ -48,5 +40,8 @@ public class AsientoDTO {
     public void setNumero(String numero) {
         this.numero = numero;
     }
-    
+
+   
+
+   
 }

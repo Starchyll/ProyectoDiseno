@@ -4,6 +4,7 @@
  */
 package Frames;
 
+import itson.rutappdto.BoletoDTO;
 import itson.rutappdto.DetallesPagoDTO;
 import java.util.List;
 
@@ -18,6 +19,7 @@ public class ResumenCompra extends javax.swing.JFrame {
      */
     public ResumenCompra() {
         initComponents();
+        
     }
 
     /**
@@ -38,11 +40,11 @@ public class ResumenCompra extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
-        origen = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        lblOrigen = new javax.swing.JLabel();
+        lblDestino = new javax.swing.JLabel();
+        lblNumAsientos = new javax.swing.JLabel();
+        lblDuracion = new javax.swing.JLabel();
+        lblNombre = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
@@ -52,7 +54,11 @@ public class ResumenCompra extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        lblPrecio1 = new javax.swing.JLabel();
+        lblTotal = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        lblMonedero1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -112,7 +118,7 @@ public class ResumenCompra extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Total");
-        BackGround.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 430, 160, -1));
+        BackGround.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 440, 160, -1));
         BackGround.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 173, 480, 0));
         BackGround.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 270, -1, 110));
 
@@ -122,48 +128,48 @@ public class ResumenCompra extends javax.swing.JFrame {
         jLabel3.setText("Resumen de compra");
         BackGround.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 160, -1));
 
-        origen.setBackground(new java.awt.Color(255, 255, 255));
-        origen.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
-        origen.setForeground(new java.awt.Color(0, 0, 0));
-        origen.setText("Origen");
-        origen.addInputMethodListener(new java.awt.event.InputMethodListener() {
+        lblOrigen.setBackground(new java.awt.Color(255, 255, 255));
+        lblOrigen.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
+        lblOrigen.setForeground(new java.awt.Color(0, 0, 0));
+        lblOrigen.setText("Origen");
+        lblOrigen.addInputMethodListener(new java.awt.event.InputMethodListener() {
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                origenInputMethodTextChanged(evt);
+                lblOrigenInputMethodTextChanged(evt);
             }
         });
-        BackGround.add(origen, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 150, 70, -1));
+        BackGround.add(lblOrigen, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 150, 70, -1));
 
-        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel5.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel5.setText("Destino");
-        BackGround.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 190, 160, -1));
+        lblDestino.setBackground(new java.awt.Color(255, 255, 255));
+        lblDestino.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
+        lblDestino.setForeground(new java.awt.Color(0, 0, 0));
+        lblDestino.setText("Destino");
+        BackGround.add(lblDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, 160, -1));
 
-        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel6.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel6.setText("Asiento(s)");
-        BackGround.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 230, 160, -1));
+        lblNumAsientos.setBackground(new java.awt.Color(255, 255, 255));
+        lblNumAsientos.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
+        lblNumAsientos.setForeground(new java.awt.Color(0, 0, 0));
+        lblNumAsientos.setText("Asiento(s)");
+        BackGround.add(lblNumAsientos, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 230, 160, -1));
 
-        jLabel7.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel7.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel7.setText("Hora Salida");
-        BackGround.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 270, 160, -1));
+        lblDuracion.setBackground(new java.awt.Color(255, 255, 255));
+        lblDuracion.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
+        lblDuracion.setForeground(new java.awt.Color(0, 0, 0));
+        lblDuracion.setText("00:00");
+        BackGround.add(lblDuracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 270, 160, -1));
 
-        jLabel8.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel8.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel8.setText("Duracion");
-        BackGround.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 160, -1));
+        lblNombre.setBackground(new java.awt.Color(255, 255, 255));
+        lblNombre.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
+        lblNombre.setForeground(new java.awt.Color(0, 0, 0));
+        lblNombre.setText("Nombre(s)");
+        BackGround.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 310, 160, -1));
 
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
         jLabel9.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Precio");
-        BackGround.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 160, -1));
+        BackGround.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 160, -1));
 
         jLabel10.setBackground(new java.awt.Color(255, 255, 255));
         jLabel10.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
@@ -171,9 +177,9 @@ public class ResumenCompra extends javax.swing.JFrame {
         jLabel10.setText("Monedero");
         BackGround.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, 160, -1));
         BackGround.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 460, -1));
-        BackGround.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 460, 50));
+        BackGround.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 440, 20));
         BackGround.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 463, 460, 0));
-        BackGround.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 460, 10));
+        BackGround.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, 460, 10));
 
         jLabel11.setBackground(new java.awt.Color(255, 255, 255));
         jLabel11.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
@@ -193,11 +199,35 @@ public class ResumenCompra extends javax.swing.JFrame {
         jLabel13.setText("Asiento(s)");
         BackGround.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 160, -1));
 
-        jLabel14.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel14.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel14.setText("Hora Salida");
-        BackGround.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 160, -1));
+        lblPrecio1.setBackground(new java.awt.Color(255, 255, 255));
+        lblPrecio1.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
+        lblPrecio1.setForeground(new java.awt.Color(0, 0, 0));
+        lblPrecio1.setText("$....");
+        BackGround.add(lblPrecio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 360, 160, -1));
+
+        lblTotal.setBackground(new java.awt.Color(255, 255, 255));
+        lblTotal.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
+        lblTotal.setForeground(new java.awt.Color(0, 0, 0));
+        lblTotal.setText("$....");
+        BackGround.add(lblTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 440, 160, -1));
+
+        jLabel15.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel15.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel15.setText("Duracion");
+        BackGround.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 160, -1));
+
+        jLabel16.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel16.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel16.setText("Nombre(s)");
+        BackGround.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 160, -1));
+
+        lblMonedero1.setBackground(new java.awt.Color(255, 255, 255));
+        lblMonedero1.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
+        lblMonedero1.setForeground(new java.awt.Color(0, 0, 0));
+        lblMonedero1.setText("$....");
+        BackGround.add(lblMonedero1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 400, 160, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -213,15 +243,15 @@ public class ResumenCompra extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void origenInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_origenInputMethodTextChanged
+    private void lblOrigenInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_lblOrigenInputMethodTextChanged
 
-    }//GEN-LAST:event_origenInputMethodTextChanged
+    }//GEN-LAST:event_lblOrigenInputMethodTextChanged
 
     private void BackGroundInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_BackGroundInputMethodTextChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_BackGroundInputMethodTextChanged
 
-    private void cargarDetalles(List<DetallesPagoDTO> l) {
+    private void datosResumen (List<BoletoDTO> boleto){
         
     }
 
@@ -276,13 +306,10 @@ public class ResumenCompra extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
@@ -291,6 +318,13 @@ public class ResumenCompra extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
-    private javax.swing.JLabel origen;
+    private javax.swing.JLabel lblDestino;
+    private javax.swing.JLabel lblDuracion;
+    private javax.swing.JLabel lblMonedero1;
+    private javax.swing.JLabel lblNombre;
+    private javax.swing.JLabel lblNumAsientos;
+    private javax.swing.JLabel lblOrigen;
+    private javax.swing.JLabel lblPrecio1;
+    private javax.swing.JLabel lblTotal;
     // End of variables declaration//GEN-END:variables
 }

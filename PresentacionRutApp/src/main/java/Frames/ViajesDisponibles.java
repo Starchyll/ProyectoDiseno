@@ -12,6 +12,7 @@ import itson.rutappdto.CamionDTO;
 import itson.rutappdto.ViajeDTO;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -26,11 +27,13 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -38,19 +41,18 @@ import javax.swing.table.DefaultTableModel;
  * @author mmax2
  */
 public class ViajesDisponibles extends javax.swing.JFrame {
-    
+
     List<ViajeDTO> viajesDTO;
 
     /**
      * Creates new form ComprarViaje
+     *
      * @param viajesDTO
      */
     public ViajesDisponibles(List<ViajeDTO> viajesDTO) {
         initComponents();
         this.viajesDTO = viajesDTO;
         cargarViajesEnTarjetas(viajesDTO);
-        
- 
 
     }
 
@@ -59,10 +61,10 @@ public class ViajesDisponibles extends javax.swing.JFrame {
         for (ViajeDTO viaje : viajes) {
             JPanel tarjeta = crearTarjetaViaje(viaje);
             mainPanel.add(tarjeta);
-             mainPanel.add(Box.createVerticalStrut(8)); 
+            mainPanel.add(Box.createVerticalStrut(8));
         }
     }
-    
+
     // Crear la tarjeta para un viaje
     private JPanel crearTarjetaViaje(ViajeDTO viaje) {
         JPanel panel = new JPanel();
@@ -75,11 +77,11 @@ public class ViajesDisponibles extends javax.swing.JFrame {
         panel.setPreferredSize(new Dimension(2, 100)); // Tamaño de la tarjeta
 
         // Aquí usamos HTML para mostrar los detalles del viaje
-        String viajeInfo = "<html><b>Destino:  </b>" + viaje.getDestino() 
+        String viajeInfo = "<html><b>Destino:  </b>" + viaje.getDestino()
                 + "<b>  Origen:</b> " + viaje.getOrigen() + "<br>"
                 + "<b>Duración:</b> " + viaje.getDuracion() + "<br>"
                 + "<b>Precio:</b> $" + viaje.getPrecio()
-                + "<br> <b>Numero camion:</b> " + viaje.getCamion().getNumeroCamion()+ "</html>";
+                + "<br> <b>Numero camion:</b> " + viaje.getCamion().getNumeroCamion() + "</html>";
 
         JLabel label = new JLabel(viajeInfo);
         label.setFont(new Font("SansSerif", Font.PLAIN, 14));
@@ -89,8 +91,13 @@ public class ViajesDisponibles extends javax.swing.JFrame {
         panel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-               
-               CordinadorPresentacion.getInstancia().abrirAsientosDisponibles(viaje.getCamion());
+                CordinadorPresentacion.getInstancia().abrirAsientosDisponibles(viaje.getCamion());
+
+                Component comp = SwingUtilities.getWindowAncestor(panel);
+                if (comp instanceof JFrame) {
+                    ((JFrame) comp).dispose();
+                }
+
             }
 
             @Override
@@ -104,8 +111,8 @@ public class ViajesDisponibles extends javax.swing.JFrame {
                 panel.setBackground(new Color(173, 216, 230)); // Vuelve al color pastel
             }
         });
-        
         return panel;
+
     }
 
     /**
@@ -201,7 +208,7 @@ public class ViajesDisponibles extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(mainPanel);
 
-        BackGround.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 420, 260));
+        BackGround.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 420, 260));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -223,10 +230,6 @@ public class ViajesDisponibles extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
 
-   
-
-   
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BackGround;
