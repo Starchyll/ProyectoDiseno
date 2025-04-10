@@ -4,11 +4,15 @@
  */
 package Control;
 
+import Ex.CompraBoletoException;
 import Fachada.ComprarBoleto;
 import Interfaz.IComprarBoleto;
+import enumm.estadoAsiento;
 import itson.rutappdto.AsientoDTO;
+import itson.rutappdto.CamionDTO;
 import itson.rutappdto.ViajeDTO;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
@@ -19,6 +23,8 @@ import javax.swing.JOptionPane;
  * @author chris
  */
 public class ControlNegocio {
+
+    IComprarBoleto comprarBoleto = new ComprarBoleto();
 
     private static ControlNegocio instancia;
 
@@ -49,45 +55,22 @@ public class ControlNegocio {
         return Arrays.asList("Ciudad A", "Ciudad B", "Ciudad C");
     }
 
-    public List<ViajeDTO> obtenerListaViajes() {
+    public List<ViajeDTO> obtenerListaViajes(String origen, String Destino, LocalDate fecha) {
         List<ViajeDTO> viajes = new ArrayList<>();
-        ViajeDTO viaje1 = new ViajeDTO(1L, 300.0, "Cd. Obregón", "Hermosillo", "3h 30min", 1L);
-        ViajeDTO viaje2 = new ViajeDTO(2L, 300.0, "Cd. Obregón", "Hermosillo", "3h 30min", 2L);
-        ViajeDTO viaje3 = new ViajeDTO(3L, 300.0, "Hermosillo", "Navojoa", "3h 30min", 1L);
-
-        viajes.add(viaje1);
-        viajes.add(viaje2);
-        viajes.add(viaje3);
-        return viajes;
-
-    }
-
-    public String[][] obtenerViajesDisponibles(String origen, String destino, LocalDate fecha) {
-//        IConsultarDisponibilidad consultar = new ConsultarDisponibilid();
-//
-//        try {
-//            listaaObtenida = consultar.getViajesDisponibles(origen, destino, fecha
-//        } catch (Exception e) {
-//        }
-//        if (listaaObtenida) {
-//             == null
-//        }
-//        ){
-//            JOptionPane
-//        }
-//        return listaObtenida;
-        if (origen.equals("B") && destino.equals("A")) {
-            return new String[][]{
-                {"L-123", "Cd. Obregon", "Hermosillo", "3h 30min", "$300", "ABC123"},
-                {"L-124", "Cd. Obregon", "Hermosillo", "3h 30min", "$300", "DEF456"},
-                {"L-125", "Cd. Obregon", "Hermosillo", "3h 30min", "$300", "GHI789"}
-            };
-
+        Long contador = 0L;
+        for (int i = 0; i < 3; i++) {
+            contador++;
+            viajes.add(new ViajeDTO(contador, 300.00, origen, Destino, "3hr 30min", 1L, fecha));
         }
-
-        // Si no hay coincidencias, regresa arreglo vacío
-        return new String[0][];
+        return viajes;
     }
+
+    public List<ViajeDTO> obtenerViajesDisponibles(String origen, String Destino, LocalDate fecha) {
+        return null;
+    }
+
+    ;
+    
 
     public void comprarBoleto() {
 
@@ -147,10 +130,9 @@ public class ControlNegocio {
     public void registrarDetallesBoleto() {
 
     }
-    
-    public List<AsientoDTO> obtenerAsientos() {
-        IComprarBoleto comprarBoleto = new ComprarBoleto();
-        
-        return comprarBoleto.mostrarListaAsientos();
+
+    public List<AsientoDTO> obtenerAsientos(CamionDTO camion) throws CompraBoletoException {
+        return comprarBoleto.mostrarListaAsientos(camion);
+
     }
 }

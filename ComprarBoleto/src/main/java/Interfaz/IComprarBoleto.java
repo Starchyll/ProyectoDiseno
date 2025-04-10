@@ -4,7 +4,9 @@
  */
 package Interfaz;
 
+import Ex.CompraBoletoException;
 import itson.rutappdto.AsientoDTO;
+import itson.rutappdto.CamionDTO;
 import java.util.List;
 
 /**
@@ -15,7 +17,7 @@ public interface IComprarBoleto {
     void consultarAsientos();
     void mostrarViajesDisponibles();
     void mostrarBusquedaViaje();
-    List<AsientoDTO> mostrarListaAsientos();
+    List<AsientoDTO> mostrarListaAsientos(CamionDTO camion) throws CompraBoletoException;
     void mostrarPantallaPago();
     void seleccionarAsiento(int asiento);
     void comprarBoleto();

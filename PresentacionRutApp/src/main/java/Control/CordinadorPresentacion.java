@@ -63,7 +63,7 @@ public class CordinadorPresentacion {
     }
 
     public void mostrarViajesDisponibles(String origen, String destino, LocalDate fecha) {
-        List<ViajeDTO> datos = ControlNegocio.getInstancia().obtenerListaViajes();
+        List<ViajeDTO> datos = ControlNegocio.getInstancia().obtenerListaViajes(origen, destino, fecha);
         ViajesDisponibles ventana = new ViajesDisponibles();
         ventana.cargarViajesEnTabla(datos);
         ventana.setVisible(true);
