@@ -1,5 +1,6 @@
 package Frames;
 
+import itson.rutappdto.CamionDTO;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -19,6 +20,7 @@ import javax.swing.JPanel;
  */
 public class AsientosDisponibles extends javax.swing.JFrame {
 
+    CamionDTO camion;
     // Definir el Enum para los estados de los asientos
     public enum EstadoAsiento {
         LIBRE, SELECCIONADO, OCUPADO
@@ -30,8 +32,9 @@ public class AsientosDisponibles extends javax.swing.JFrame {
     /**
      * Creates new form ComprarViaje
      */
-    public AsientosDisponibles() {
+    public AsientosDisponibles(CamionDTO camion) {
         initComponents();
+        this.camion = camion;
         // Lista de paneles
         JPanel[] paneles = {
             botonAsientoNueve, botonAsientoDiez, botonAsientoDiesciseis, botonAsientoQuince, botonAsientoCatorce,

@@ -10,11 +10,21 @@ import enumm.estadoAsiento;
 import itson.rutappdto.AsientoDTO;
 import itson.rutappdto.CamionDTO;
 import itson.rutappdto.ViajeDTO;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.HeadlessException;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.time.LocalDate;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -29,70 +39,73 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ViajesDisponibles extends javax.swing.JFrame {
     
-    public List<AsientoDTO> listaAsiento = CreaAsientos();
-    
-    public List<AsientoDTO> CreaAsientos (){
-        List<AsientoDTO> asientos;
-        asientos = new ArrayList<>();
-        for (int i = 0; i < 25; i++) {
-            asientos.add(new AsientoDTO(estadoAsiento.DISPONIBLE, "(i+1)"));
-        }
-        return asientos;
-    }
-    
-    public CamionDTO camion = new CamionDTO(1L, "0000", listaAsiento);
-    public CamionDTO camion2 = new CamionDTO(2L, "0001", listaAsiento);
-    public CamionDTO camion3 = new CamionDTO(3L, "0002", listaAsiento);
-    
-    
-    
-  
-    
-    
-    
-    
-
-
-    DefaultTableModel mt = new DefaultTableModel();
+    List<ViajeDTO> viajesDTO;
 
     /**
      * Creates new form ComprarViaje
+     * @param viajesDTO
      */
-    public ViajesDisponibles() {
+    public ViajesDisponibles(List<ViajeDTO> viajesDTO) {
         initComponents();
-        String ids[] = {"Numero", "Origen", "Destino", "Duracion", "Precio", ""};
-        mt.setColumnIdentifiers(ids);
-        tblViajes.setModel(mt);
+        this.viajesDTO = viajesDTO;
+        cargarViajesEnTarjetas(viajesDTO);
+        
  
 
     }
 
-    public void cargarViajesEnTabla(List<ViajeDTO> datos) {
-        DefaultTableModel modelo = (DefaultTableModel) tblViajes.getModel();
-        modelo.setRowCount(0);
-
-        // Agregar los datos a la tabla
-        for (ViajeDTO viaje : datos) {
-            modelo.addRow(new Object[]{
-                viaje.getIdCamion(),
-                viaje.getOrigen(),
-                viaje.getDestino(),
-                viaje.getDuracion(),
-                viaje.getPrecio(),
-                "Comprar"
-            });
+    public void cargarViajesEnTarjetas(List<ViajeDTO> viajes) {
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        for (ViajeDTO viaje : viajes) {
+            JPanel tarjeta = crearTarjetaViaje(viaje);
+            mainPanel.add(tarjeta);
+             mainPanel.add(Box.createVerticalStrut(8)); 
         }
+    }
+    
+    // Crear la tarjeta para un viaje
+    private JPanel crearTarjetaViaje(ViajeDTO viaje) {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+        panel.setBackground(new Color(173, 216, 230)); // Azul pastel
+        panel.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(100, 149, 237), 1),
+                BorderFactory.createEmptyBorder(10, 15, 10, 15)
+        ));
+        panel.setPreferredSize(new Dimension(2, 100)); // Tamaño de la tarjeta
 
-        // Hacer que las columnas no sean redimensionables
-        for (int i = 0; i < tblViajes.getColumnCount(); i++) {
-            tblViajes.getColumnModel().getColumn(i).setResizable(false);
-        }
+        // Aquí usamos HTML para mostrar los detalles del viaje
+        String viajeInfo = "<html><b>Destino:  </b>" + viaje.getDestino() 
+                + "<b>  Origen:</b> " + viaje.getOrigen() + "<br>"
+                + "<b>Duración:</b> " + viaje.getDuracion() + "<br>"
+                + "<b>Precio:</b> $" + viaje.getPrecio()
+                + "<br> <b>Numero camion:</b> " + viaje.getCamion().getNumeroCamion()+ "</html>";
 
-        // Deshabilitar mover columnas
-        tblViajes.getTableHeader().setReorderingAllowed(false);
+        JLabel label = new JLabel(viajeInfo);
+        label.setFont(new Font("SansSerif", Font.PLAIN, 14));
+        panel.add(label, BorderLayout.CENTER);
 
-        // Hacer que la tabla no sea editable
-        tblViajes.setDefaultEditor(Object.class, null);
+        // Añadir evento de clic para mostrar los detalles en un JOptionPane
+        panel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+               
+               CordinadorPresentacion.getInstancia().abrirAsientosDisponibles(viaje.getCamion());
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                panel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                panel.setBackground(new Color(135, 206, 250)); // Azul más brillante al pasar mouse
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                panel.setBackground(new Color(173, 216, 230)); // Vuelve al color pastel
+            }
+        });
+        
+        return panel;
     }
 
     /**
@@ -110,7 +123,7 @@ public class ViajesDisponibles extends javax.swing.JFrame {
         Footer = new javax.swing.JPanel();
         btnVolver = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblViajes = new javax.swing.JTable();
+        mainPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -175,39 +188,20 @@ public class ViajesDisponibles extends javax.swing.JFrame {
 
         BackGround.add(Footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 500, 520, 60));
 
-        tblViajes.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
+        javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
+        mainPanel.setLayout(mainPanelLayout);
+        mainPanelLayout.setHorizontalGroup(
+            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 420, Short.MAX_VALUE)
+        );
+        mainPanelLayout.setVerticalGroup(
+            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 440, Short.MAX_VALUE)
+        );
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tblViajes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblViajesMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tblViajes);
-        if (tblViajes.getColumnModel().getColumnCount() > 0) {
-            tblViajes.getColumnModel().getColumn(0).setResizable(false);
-            tblViajes.getColumnModel().getColumn(1).setResizable(false);
-            tblViajes.getColumnModel().getColumn(2).setResizable(false);
-            tblViajes.getColumnModel().getColumn(3).setResizable(false);
-        }
+        jScrollPane1.setViewportView(mainPanel);
 
-        BackGround.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 460, 110));
+        BackGround.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 420, 260));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -229,94 +223,10 @@ public class ViajesDisponibles extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
 
-    public ViajesDisponibles(JPanel BackGround, JPanel Footer, JPanel Header, JButton btnVolver, JLabel jLabel1, JScrollPane jScrollPane1, JTable tblViajes) throws HeadlessException {
-        this.BackGround = BackGround;
-        this.Footer = Footer;
-        this.Header = Header;
-        this.btnVolver = btnVolver;
-        this.jLabel1 = jLabel1;
-        this.jScrollPane1 = jScrollPane1;
-        this.tblViajes = tblViajes;
-    }
+   
 
-    private void tblViajesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblViajesMouseClicked
-        // Obtener la fila y columna donde se hizo clic
-        int row = tblViajes.rowAtPoint(evt.getPoint());
-        int col = tblViajes.columnAtPoint(evt.getPoint());
-
-        // Verificar si la columna es la 6 columna (índice 5)
-        if (col == 5) {
-            // Obtener los datos de esa fila y columna
-
-            Object idCamion = tblViajes.getValueAt(row, 0);
-            Object origen = tblViajes.getValueAt(row, 1);
-            Object destino = tblViajes.getValueAt(row, 2);
-            Object duracion = tblViajes.getValueAt(row, 3);
-            Object precio = tblViajes.getValueAt(row, 4);
-
-            StringBuilder texto = new StringBuilder();
-            texto.append("ID Camión: ").append(idCamion).append("\n")
-                    .append("Origen: ").append(origen).append("\n")
-                    .append("Destino: ").append(destino).append("\n")
-                    .append("Duración: ").append(duracion).append("\n")
-                    .append("Precio: ").append(precio);
-
-// Mostrar el mensaje en un JOptionPane
-            JOptionPane.showMessageDialog(this, texto.toString());
-            CordinadorPresentacion.getInstancia().abrirAsientosDisponibles();
-            this.dispose();
-        }
-    }//GEN-LAST:event_tblViajesMouseClicked
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViajesDisponibles.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViajesDisponibles.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViajesDisponibles.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViajesDisponibles.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ViajesDisponibles().setVisible(true);
-            }
-        });
-    }
+   
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BackGround;
@@ -325,6 +235,6 @@ public class ViajesDisponibles extends javax.swing.JFrame {
     private javax.swing.JButton btnVolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblViajes;
+    private javax.swing.JPanel mainPanel;
     // End of variables declaration//GEN-END:variables
 }

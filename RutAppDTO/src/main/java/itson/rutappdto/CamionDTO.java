@@ -9,12 +9,12 @@ import java.util.List;
  */
 public class CamionDTO {
     private Long idCamion;
-    private String matricula;
+    private String numeroCamion;
     private List<AsientoDTO> listaAsiento;
 
     public CamionDTO(Long idCamion, String matricula, List<AsientoDTO> listaAsiento) {
         this.idCamion = idCamion;
-        this.matricula = matricula;
+        this.numeroCamion = matricula;
         this.listaAsiento = listaAsiento;
     }
 
@@ -22,8 +22,8 @@ public class CamionDTO {
         return idCamion;
     }
 
-    public String getMatricula() {
-        return matricula;
+    public String getNumeroCamion() {
+        return numeroCamion;
     }
 
     public List<AsientoDTO> getListaAsiento() {

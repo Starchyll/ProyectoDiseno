@@ -31,6 +31,21 @@ public class ControlNegocio {
     public ControlNegocio() {
     }
 
+    private List<AsientoDTO> crearListaAsientos() {
+        List<AsientoDTO> listaAsientos = new ArrayList<>();
+        
+        for (long i = 0; i < 24; i++) {
+            String numero = String.valueOf(i);
+            if (i == 5 ||i == 7 ||i == 20){
+                listaAsientos.add(new AsientoDTO(i, estadoAsiento.OCUPADO, numero));
+            } else {
+                listaAsientos.add(new AsientoDTO(i, estadoAsiento.DISPONIBLE, numero));                
+            }
+            
+        }
+        return listaAsientos;
+    }
+
     public static ControlNegocio getInstancia() {
         if (instancia == null) {
             instancia = new ControlNegocio();
@@ -58,9 +73,10 @@ public class ControlNegocio {
     public List<ViajeDTO> obtenerListaViajes(String origen, String Destino, LocalDate fecha) {
         List<ViajeDTO> viajes = new ArrayList<>();
         Long contador = 0L;
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 8; i++) {
             contador++;
-            viajes.add(new ViajeDTO(contador, 300.00, origen, Destino, "3hr 30min", 1L, fecha));
+            CamionDTO camion = new CamionDTO(contador, (i+1)+"a", crearListaAsientos());
+            viajes.add(new ViajeDTO(contador, 300.00, origen, Destino, "3hr 30min", camion, fecha));
         }
         return viajes;
     }

@@ -13,19 +13,19 @@ public class ViajeDTO {
     private String origen;
     private String destino;
     private String duracion;
-    private Long idCamion;
+    private CamionDTO camion;
     private LocalDate fecha;
 
     public ViajeDTO() {
     }
 
-    public ViajeDTO(Long idViaje, Double precio, String origen, String destino, String duracion, Long idCamion, LocalDate fecha) {
+    public ViajeDTO(Long idViaje, Double precio, String origen, String destino, String duracion, CamionDTO camion, LocalDate fecha) {
         this.idViaje = idViaje;
         this.precio = precio;
         this.origen = origen;
         this.destino = destino;
         this.duracion = duracion;
-        this.idCamion = idCamion;
+        this.camion = camion;
         this.fecha = fecha;
     }
 
@@ -69,14 +69,15 @@ public class ViajeDTO {
         this.duracion = duracion;
     }
 
-    public Long getIdCamion() {
-        return idCamion;
+    public CamionDTO getCamion() {
+        return camion;
     }
 
-    public void setIdCamion(Long idCamion) {
-        this.idCamion = idCamion;
+    public void setCamion(CamionDTO camion) {
+        this.camion = camion;
     }
 
+  
     public LocalDate getFecha() {
         return fecha;
     }

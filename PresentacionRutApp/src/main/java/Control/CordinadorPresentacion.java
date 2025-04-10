@@ -43,13 +43,13 @@ public class CordinadorPresentacion {
         forma.setVisible(true);
     }
 
-    public void abrirViajesDisponibles() {
-        ViajesDisponibles forma = new ViajesDisponibles();
-        forma.setVisible(true);
-    }
+//    public void abrirViajesDisponibles(List<ViajeDTO> viajes) {
+//        ViajesDisponibles forma = new ViajesDisponibles(viajes);
+//        forma.setVisible(true);
+//    }
     
-    public void abrirAsientosDisponibles(){
-        AsientosDisponibles formAsientosDisponibles = new AsientosDisponibles();
+    public void abrirAsientosDisponibles(CamionDTO camion){
+        AsientosDisponibles formAsientosDisponibles = new AsientosDisponibles(camion);
         formAsientosDisponibles.setVisible(true);
         
     }
@@ -63,9 +63,8 @@ public class CordinadorPresentacion {
     }
 
     public void mostrarViajesDisponibles(String origen, String destino, LocalDate fecha) {
-        List<ViajeDTO> datos = ControlNegocio.getInstancia().obtenerListaViajes(origen, destino, fecha);
-        ViajesDisponibles ventana = new ViajesDisponibles();
-        ventana.cargarViajesEnTabla(datos);
+        List<ViajeDTO> viajes = ControlNegocio.getInstancia().obtenerListaViajes(origen, destino, fecha);
+        ViajesDisponibles ventana = new ViajesDisponibles(viajes);
         ventana.setVisible(true);
     }
 
