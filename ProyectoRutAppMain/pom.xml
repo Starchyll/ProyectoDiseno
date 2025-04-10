@@ -9,6 +9,7 @@
         <module>../PresentacionRutApp</module>
         <module>../RutAppDTO</module>
         <module>../../../NetBeansProjects/ComprarBoleto</module>
+        <module>../ComprarBoleto</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
