@@ -4,8 +4,10 @@
  */
 package Control;
 
+import Ex.CompraBoletoException;
 import enumm.estadoAsiento;
 import itson.rutappdto.AsientoDTO;
+import itson.rutappdto.CamionDTO;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +16,7 @@ import java.util.List;
  * @author multaslokas33
  */
 public class Control {
+
     public void obtenerAsientosDisponibles() {
         System.out.println("Obteniendo asientos disponibles...");
     }
@@ -26,6 +29,13 @@ public class Control {
         System.out.println("Buscando viaje según criterios...");
     }
 
+    public List<AsientoDTO> mostrarListaAsientos(CamionDTO camion) throws CompraBoletoException {
+        if (camion.getListaAsiento().isEmpty()) {
+            return null;
+        }
+        return camion.getListaAsiento();
+    }
+
     public List<AsientoDTO> mostrarListaAsientos() {
         List<AsientoDTO> listaAsientos = new ArrayList<>();
 
@@ -34,8 +44,10 @@ public class Control {
         listaAsientos.add(new AsientoDTO(3L, estadoAsiento.DISPONIBLE, "A3"));
         listaAsientos.add(new AsientoDTO(4L, estadoAsiento.DISPONIBLE, "A4"));
         listaAsientos.add(new AsientoDTO(5L, estadoAsiento.DISPONIBLE, "A5"));
+        
 
         return listaAsientos;
+
     }
 
     public void mostrarPantallaPago() {

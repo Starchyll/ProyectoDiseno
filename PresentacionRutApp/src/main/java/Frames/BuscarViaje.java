@@ -4,7 +4,9 @@
  */
 package Frames;
 
+import Control.ControlNegocio;
 import Control.CordinadorPresentacion;
+import itson.rutappdto.ViajeDTO;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
@@ -202,7 +204,7 @@ public class BuscarViaje extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Por favor seleccione una fecha.");
                 return;
             }
-
+          
             java.util.Date fecha = calendar.getTime(); // Obtener la fecha como Date
 
             // Si necesitas convertir la fecha a LocalDate

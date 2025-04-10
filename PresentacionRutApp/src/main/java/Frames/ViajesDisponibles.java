@@ -6,9 +6,13 @@ package Frames;
 
 import Control.ControlNegocio;
 import Control.CordinadorPresentacion;
+import enumm.estadoAsiento;
+import itson.rutappdto.AsientoDTO;
+import itson.rutappdto.CamionDTO;
 import itson.rutappdto.ViajeDTO;
 import java.awt.HeadlessException;
 import java.time.LocalDate;
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
@@ -24,8 +28,31 @@ import javax.swing.table.DefaultTableModel;
  * @author mmax2
  */
 public class ViajesDisponibles extends javax.swing.JFrame {
+    
+    public List<AsientoDTO> listaAsiento = CreaAsientos();
+    
+    public List<AsientoDTO> CreaAsientos (){
+        List<AsientoDTO> asientos;
+        asientos = new ArrayList<>();
+        for (int i = 0; i < 25; i++) {
+            asientos.add(new AsientoDTO(estadoAsiento.DISPONIBLE, "(i+1)"));
+        }
+        return asientos;
+    }
+    
+    public CamionDTO camion = new CamionDTO(1L, "0000", listaAsiento);
+    public CamionDTO camion2 = new CamionDTO(2L, "0001", listaAsiento);
+    public CamionDTO camion3 = new CamionDTO(3L, "0002", listaAsiento);
+    
+    
+    
+  
+    
+    
+    
+    
 
-    private List<ViajeDTO> datos = ControlNegocio.getInstancia().obtenerListaViajes();
+
     DefaultTableModel mt = new DefaultTableModel();
 
     /**
@@ -36,8 +63,7 @@ public class ViajesDisponibles extends javax.swing.JFrame {
         String ids[] = {"Numero", "Origen", "Destino", "Duracion", "Precio", ""};
         mt.setColumnIdentifiers(ids);
         tblViajes.setModel(mt);
-
-        cargarViajesEnTabla(this.datos);
+ 
 
     }
 

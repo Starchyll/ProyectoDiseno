@@ -1,3 +1,4 @@
+Ex\CompraBoletoException.class
 Interfaz\IComprarBoleto.class
 Fachada\ComprarBoleto.class
 com\mycompany\comprarboleto\ComprarBoleto.class

@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -18,7 +19,6 @@ import javax.swing.JPanel;
  */
 public class AsientosDisponibles extends javax.swing.JFrame {
 
-    
     // Definir el Enum para los estados de los asientos
     public enum EstadoAsiento {
         LIBRE, SELECCIONADO, OCUPADO
@@ -26,8 +26,7 @@ public class AsientosDisponibles extends javax.swing.JFrame {
 
     // Crear un HashMap que relacione cada panel con su estado
     private Map<JPanel, EstadoAsiento> mapaEstadosAsientos = new HashMap<>();
-    
-    
+
     /**
      * Creates new form ComprarViaje
      */
@@ -35,25 +34,47 @@ public class AsientosDisponibles extends javax.swing.JFrame {
         initComponents();
         // Lista de paneles
         JPanel[] paneles = {
-            botonAsiento10, botonAsiento11, botonAsiento12, botonAsiento13, botonAsiento14,
-            botonAsiento15, botonAsiento16, botonAsiento17, botonAsiento18, botonAsiento19,
-            botonAsiento2, botonAsiento20, botonAsiento21, botonAsiento22, botonAsiento23,
-            botonAsiento3, botonAsiento4, botonAsiento5, botonAsiento6, botonAsiento7,
-            botonAsiento8, botonAsiento9, botonAsientoUno, botonAsientoUno1
+            botonAsientoNueve, botonAsientoDiez, botonAsientoDiesciseis, botonAsientoQuince, botonAsientoCatorce,
+            botonAsientoTrece, botonAsientoDiescinueve, botonAsientoVeinte, botonAsientoDiesciocho, botonAsientoDiescisiete,
+            botonAsiento2, botonAsientoVeintitres, botonAsientoVeinticuatro, botonAsientoVeintiuno, botonAsientoVeintidos,
+            botonAsiento3, botonAsientoOcho, botonAsientoSiete, botonAsientoCinco, botonAsientoSeis,
+            botonAsientoDoce, botonAsientoOnce, botonAsientoUno, botonAsientoUno1
         };
 
-        // Inicializar el estado de cada panel en el HashMap
         for (JPanel panel : paneles) {
-            mapaEstadosAsientos.put(panel, EstadoAsiento.LIBRE); // Al principio, todos los asientos están libres
-            // Agregar el MouseListener para cada panel
+            mapaEstadosAsientos.put(panel, EstadoAsiento.LIBRE);
             panel.addMouseListener(new java.awt.event.MouseAdapter() {
                 @Override
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    seleccionarAsiento(panel); // Llamar al método de selección de asiento
+                    seleccionarAsiento(panel);
                 }
             });
         }
+        // Marcar los asientos ocupados al iniciar
+        marcarAsientosOcupados(botonAsientoUno, botonAsientoCinco, botonAsientoDiescisiete); // <--- Agrega más si quieres
+
         mapaEstadosAsientos.put(botonAsientoUno, EstadoAsiento.OCUPADO);
+    }
+
+    // Devuelve una lista de los paneles que están ocupados
+    private List<JPanel> obtenerAsientosOcupados() {
+        List<JPanel> ocupados = new java.util.ArrayList<>();
+
+        for (Map.Entry<JPanel, EstadoAsiento> entry : mapaEstadosAsientos.entrySet()) {
+            if (entry.getValue() == EstadoAsiento.OCUPADO) {
+                ocupados.add(entry.getKey());
+            }
+        }
+
+        return ocupados;
+    }
+
+    // Método para marcar asientos ocupados
+    private void marcarAsientosOcupados(JPanel... ocupados) {
+        for (JPanel panel : ocupados) {
+            mapaEstadosAsientos.put(panel, EstadoAsiento.OCUPADO);
+            panel.setBackground(new Color(153, 0, 0)); // Rojo oscuro
+        }
     }
 
     /**
@@ -71,53 +92,53 @@ public class AsientosDisponibles extends javax.swing.JFrame {
         Footer = new javax.swing.JPanel();
         contenedorAsientos = new javax.swing.JPanel();
         botonAsientoUno = new javax.swing.JPanel();
-        numeroAsiento = new javax.swing.JLabel();
+        numeroAsientoUno = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         botonAsiento2 = new javax.swing.JPanel();
-        numeroAsiento2 = new javax.swing.JLabel();
+        numeroAsientoDos = new javax.swing.JLabel();
         botonAsiento3 = new javax.swing.JPanel();
-        numeroAsiento1 = new javax.swing.JLabel();
+        numeroAsientoCuatro = new javax.swing.JLabel();
         botonAsientoUno1 = new javax.swing.JPanel();
-        numeroAsiento3 = new javax.swing.JLabel();
-        botonAsiento4 = new javax.swing.JPanel();
+        numeroAsientoTres = new javax.swing.JLabel();
+        botonAsientoOcho = new javax.swing.JPanel();
         numeroAsiento7 = new javax.swing.JLabel();
-        botonAsiento5 = new javax.swing.JPanel();
+        botonAsientoSiete = new javax.swing.JPanel();
         numeroAsiento6 = new javax.swing.JLabel();
-        botonAsiento6 = new javax.swing.JPanel();
-        numeroAsiento4 = new javax.swing.JLabel();
-        botonAsiento7 = new javax.swing.JPanel();
+        botonAsientoCinco = new javax.swing.JPanel();
         numeroAsiento5 = new javax.swing.JLabel();
-        botonAsiento9 = new javax.swing.JPanel();
+        botonAsientoSeis = new javax.swing.JPanel();
+        numeroAsientoSeis = new javax.swing.JLabel();
+        botonAsientoOnce = new javax.swing.JPanel();
         numeroAsiento10 = new javax.swing.JLabel();
-        botonAsiento8 = new javax.swing.JPanel();
+        botonAsientoDoce = new javax.swing.JPanel();
         numeroAsiento11 = new javax.swing.JLabel();
-        botonAsiento10 = new javax.swing.JPanel();
+        botonAsientoNueve = new javax.swing.JPanel();
         numeroAsiento8 = new javax.swing.JLabel();
-        botonAsiento11 = new javax.swing.JPanel();
+        botonAsientoDiez = new javax.swing.JPanel();
         numeroAsiento9 = new javax.swing.JLabel();
-        botonAsiento12 = new javax.swing.JPanel();
+        botonAsientoDiesciseis = new javax.swing.JPanel();
         numeroAsiento15 = new javax.swing.JLabel();
-        botonAsiento13 = new javax.swing.JPanel();
+        botonAsientoQuince = new javax.swing.JPanel();
         numeroAsiento14 = new javax.swing.JLabel();
-        botonAsiento14 = new javax.swing.JPanel();
+        botonAsientoCatorce = new javax.swing.JPanel();
         numeroAsiento13 = new javax.swing.JLabel();
-        botonAsiento15 = new javax.swing.JPanel();
+        botonAsientoTrece = new javax.swing.JPanel();
         numeroAsiento12 = new javax.swing.JLabel();
-        botonAsiento17 = new javax.swing.JPanel();
+        botonAsientoVeinte = new javax.swing.JPanel();
         numeroAsiento19 = new javax.swing.JLabel();
-        botonAsiento16 = new javax.swing.JPanel();
+        botonAsientoDiescinueve = new javax.swing.JPanel();
         numeroAsiento18 = new javax.swing.JLabel();
-        botonAsiento19 = new javax.swing.JPanel();
+        botonAsientoDiescisiete = new javax.swing.JPanel();
         numeroAsiento16 = new javax.swing.JLabel();
-        botonAsiento18 = new javax.swing.JPanel();
+        botonAsientoDiesciocho = new javax.swing.JPanel();
         numeroAsiento17 = new javax.swing.JLabel();
-        botonAsiento20 = new javax.swing.JPanel();
+        botonAsientoVeintitres = new javax.swing.JPanel();
         numeroAsiento22 = new javax.swing.JLabel();
-        botonAsiento21 = new javax.swing.JPanel();
+        botonAsientoVeinticuatro = new javax.swing.JPanel();
         numeroAsiento23 = new javax.swing.JLabel();
-        botonAsiento22 = new javax.swing.JPanel();
+        botonAsientoVeintiuno = new javax.swing.JPanel();
         numeroAsiento20 = new javax.swing.JLabel();
-        botonAsiento23 = new javax.swing.JPanel();
+        botonAsientoVeintidos = new javax.swing.JPanel();
         numeroAsiento21 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -170,19 +191,19 @@ public class AsientosDisponibles extends javax.swing.JFrame {
 
         botonAsientoUno.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        numeroAsiento.setForeground(new java.awt.Color(255, 255, 255));
-        numeroAsiento.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        numeroAsiento.setText("1");
+        numeroAsientoUno.setForeground(new java.awt.Color(255, 255, 255));
+        numeroAsientoUno.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        numeroAsientoUno.setText("1");
 
         javax.swing.GroupLayout botonAsientoUnoLayout = new javax.swing.GroupLayout(botonAsientoUno);
         botonAsientoUno.setLayout(botonAsientoUnoLayout);
         botonAsientoUnoLayout.setHorizontalGroup(
             botonAsientoUnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(numeroAsiento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+            .addComponent(numeroAsientoUno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
         );
         botonAsientoUnoLayout.setVerticalGroup(
             botonAsientoUnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(numeroAsiento, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+            .addComponent(numeroAsientoUno, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
         );
 
         contenedorAsientos.add(botonAsientoUno, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 40, -1));
@@ -195,638 +216,638 @@ public class AsientosDisponibles extends javax.swing.JFrame {
         botonAsiento2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         botonAsiento2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        numeroAsiento2.setForeground(new java.awt.Color(255, 255, 255));
-        numeroAsiento2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        numeroAsiento2.setText("2");
-        botonAsiento2.add(numeroAsiento2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, 30));
+        numeroAsientoDos.setForeground(new java.awt.Color(255, 255, 255));
+        numeroAsientoDos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        numeroAsientoDos.setText("2");
+        botonAsiento2.add(numeroAsientoDos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, 30));
 
         contenedorAsientos.add(botonAsiento2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 40, 30));
 
         botonAsiento3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         botonAsiento3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        numeroAsiento1.setForeground(new java.awt.Color(255, 255, 255));
-        numeroAsiento1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        numeroAsiento1.setText("4");
+        numeroAsientoCuatro.setForeground(new java.awt.Color(255, 255, 255));
+        numeroAsientoCuatro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        numeroAsientoCuatro.setText("4");
 
         javax.swing.GroupLayout botonAsiento3Layout = new javax.swing.GroupLayout(botonAsiento3);
         botonAsiento3.setLayout(botonAsiento3Layout);
         botonAsiento3Layout.setHorizontalGroup(
             botonAsiento3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(numeroAsiento1, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+            .addComponent(numeroAsientoCuatro, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
         );
         botonAsiento3Layout.setVerticalGroup(
             botonAsiento3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(numeroAsiento1, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+            .addComponent(numeroAsientoCuatro, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
         );
 
         contenedorAsientos.add(botonAsiento3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 40, -1));
 
         botonAsientoUno1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        numeroAsiento3.setForeground(new java.awt.Color(255, 255, 255));
-        numeroAsiento3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        numeroAsiento3.setText("3");
+        numeroAsientoTres.setForeground(new java.awt.Color(255, 255, 255));
+        numeroAsientoTres.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        numeroAsientoTres.setText("3");
 
         javax.swing.GroupLayout botonAsientoUno1Layout = new javax.swing.GroupLayout(botonAsientoUno1);
         botonAsientoUno1.setLayout(botonAsientoUno1Layout);
         botonAsientoUno1Layout.setHorizontalGroup(
             botonAsientoUno1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(numeroAsiento3, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+            .addComponent(numeroAsientoTres, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
         );
         botonAsientoUno1Layout.setVerticalGroup(
             botonAsientoUno1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(numeroAsiento3, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+            .addComponent(numeroAsientoTres, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
         );
 
         contenedorAsientos.add(botonAsientoUno1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
 
-        botonAsiento4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        botonAsientoOcho.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         numeroAsiento7.setForeground(new java.awt.Color(255, 255, 255));
         numeroAsiento7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         numeroAsiento7.setText("8");
 
-        javax.swing.GroupLayout botonAsiento4Layout = new javax.swing.GroupLayout(botonAsiento4);
-        botonAsiento4.setLayout(botonAsiento4Layout);
-        botonAsiento4Layout.setHorizontalGroup(
-            botonAsiento4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout botonAsientoOchoLayout = new javax.swing.GroupLayout(botonAsientoOcho);
+        botonAsientoOcho.setLayout(botonAsientoOchoLayout);
+        botonAsientoOchoLayout.setHorizontalGroup(
+            botonAsientoOchoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 38, Short.MAX_VALUE)
-            .addGroup(botonAsiento4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonAsiento4Layout.createSequentialGroup()
+            .addGroup(botonAsientoOchoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(botonAsientoOchoLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(numeroAsiento7)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
-        botonAsiento4Layout.setVerticalGroup(
-            botonAsiento4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        botonAsientoOchoLayout.setVerticalGroup(
+            botonAsientoOchoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 28, Short.MAX_VALUE)
-            .addGroup(botonAsiento4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonAsiento4Layout.createSequentialGroup()
+            .addGroup(botonAsientoOchoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(botonAsientoOchoLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(numeroAsiento7)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        contenedorAsientos.add(botonAsiento4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 40, -1));
+        contenedorAsientos.add(botonAsientoOcho, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 40, -1));
 
-        botonAsiento5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        botonAsientoSiete.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         numeroAsiento6.setForeground(new java.awt.Color(255, 255, 255));
         numeroAsiento6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         numeroAsiento6.setText("7");
 
-        javax.swing.GroupLayout botonAsiento5Layout = new javax.swing.GroupLayout(botonAsiento5);
-        botonAsiento5.setLayout(botonAsiento5Layout);
-        botonAsiento5Layout.setHorizontalGroup(
-            botonAsiento5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout botonAsientoSieteLayout = new javax.swing.GroupLayout(botonAsientoSiete);
+        botonAsientoSiete.setLayout(botonAsientoSieteLayout);
+        botonAsientoSieteLayout.setHorizontalGroup(
+            botonAsientoSieteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 38, Short.MAX_VALUE)
-            .addGroup(botonAsiento5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonAsiento5Layout.createSequentialGroup()
+            .addGroup(botonAsientoSieteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(botonAsientoSieteLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(numeroAsiento6)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
-        botonAsiento5Layout.setVerticalGroup(
-            botonAsiento5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        botonAsientoSieteLayout.setVerticalGroup(
+            botonAsientoSieteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 28, Short.MAX_VALUE)
-            .addGroup(botonAsiento5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonAsiento5Layout.createSequentialGroup()
+            .addGroup(botonAsientoSieteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(botonAsientoSieteLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(numeroAsiento6)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        contenedorAsientos.add(botonAsiento5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 40, 30));
+        contenedorAsientos.add(botonAsientoSiete, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 40, 30));
 
-        botonAsiento6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        botonAsiento6.addMouseListener(new java.awt.event.MouseAdapter() {
+        botonAsientoCinco.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        botonAsientoCinco.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                botonAsiento6MouseClicked(evt);
+                botonAsientoCincoMouseClicked(evt);
             }
         });
 
-        numeroAsiento4.setForeground(new java.awt.Color(255, 255, 255));
-        numeroAsiento4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        numeroAsiento4.setText("5");
-
-        javax.swing.GroupLayout botonAsiento6Layout = new javax.swing.GroupLayout(botonAsiento6);
-        botonAsiento6.setLayout(botonAsiento6Layout);
-        botonAsiento6Layout.setHorizontalGroup(
-            botonAsiento6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 38, Short.MAX_VALUE)
-            .addGroup(botonAsiento6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonAsiento6Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(numeroAsiento4)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        botonAsiento6Layout.setVerticalGroup(
-            botonAsiento6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 28, Short.MAX_VALUE)
-            .addGroup(botonAsiento6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonAsiento6Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(numeroAsiento4)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-
-        contenedorAsientos.add(botonAsiento6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 40, -1));
-
-        botonAsiento7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
         numeroAsiento5.setForeground(new java.awt.Color(255, 255, 255));
         numeroAsiento5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        numeroAsiento5.setText("6");
+        numeroAsiento5.setText("5");
 
-        javax.swing.GroupLayout botonAsiento7Layout = new javax.swing.GroupLayout(botonAsiento7);
-        botonAsiento7.setLayout(botonAsiento7Layout);
-        botonAsiento7Layout.setHorizontalGroup(
-            botonAsiento7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout botonAsientoCincoLayout = new javax.swing.GroupLayout(botonAsientoCinco);
+        botonAsientoCinco.setLayout(botonAsientoCincoLayout);
+        botonAsientoCincoLayout.setHorizontalGroup(
+            botonAsientoCincoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 38, Short.MAX_VALUE)
-            .addGroup(botonAsiento7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonAsiento7Layout.createSequentialGroup()
+            .addGroup(botonAsientoCincoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(botonAsientoCincoLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(numeroAsiento5)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
-        botonAsiento7Layout.setVerticalGroup(
-            botonAsiento7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        botonAsientoCincoLayout.setVerticalGroup(
+            botonAsientoCincoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 28, Short.MAX_VALUE)
-            .addGroup(botonAsiento7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonAsiento7Layout.createSequentialGroup()
+            .addGroup(botonAsientoCincoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(botonAsientoCincoLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(numeroAsiento5)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        contenedorAsientos.add(botonAsiento7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 40, 30));
+        contenedorAsientos.add(botonAsientoCinco, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 40, -1));
 
-        botonAsiento9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        botonAsientoSeis.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        numeroAsientoSeis.setForeground(new java.awt.Color(255, 255, 255));
+        numeroAsientoSeis.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        numeroAsientoSeis.setText("6");
+
+        javax.swing.GroupLayout botonAsientoSeisLayout = new javax.swing.GroupLayout(botonAsientoSeis);
+        botonAsientoSeis.setLayout(botonAsientoSeisLayout);
+        botonAsientoSeisLayout.setHorizontalGroup(
+            botonAsientoSeisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 38, Short.MAX_VALUE)
+            .addGroup(botonAsientoSeisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(botonAsientoSeisLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(numeroAsientoSeis)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        botonAsientoSeisLayout.setVerticalGroup(
+            botonAsientoSeisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 28, Short.MAX_VALUE)
+            .addGroup(botonAsientoSeisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(botonAsientoSeisLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(numeroAsientoSeis)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        contenedorAsientos.add(botonAsientoSeis, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 40, 30));
+
+        botonAsientoOnce.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         numeroAsiento10.setForeground(new java.awt.Color(255, 255, 255));
         numeroAsiento10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         numeroAsiento10.setText("11");
 
-        javax.swing.GroupLayout botonAsiento9Layout = new javax.swing.GroupLayout(botonAsiento9);
-        botonAsiento9.setLayout(botonAsiento9Layout);
-        botonAsiento9Layout.setHorizontalGroup(
-            botonAsiento9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout botonAsientoOnceLayout = new javax.swing.GroupLayout(botonAsientoOnce);
+        botonAsientoOnce.setLayout(botonAsientoOnceLayout);
+        botonAsientoOnceLayout.setHorizontalGroup(
+            botonAsientoOnceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 38, Short.MAX_VALUE)
-            .addGroup(botonAsiento9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonAsiento9Layout.createSequentialGroup()
+            .addGroup(botonAsientoOnceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(botonAsientoOnceLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(numeroAsiento10)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
-        botonAsiento9Layout.setVerticalGroup(
-            botonAsiento9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        botonAsientoOnceLayout.setVerticalGroup(
+            botonAsientoOnceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 28, Short.MAX_VALUE)
-            .addGroup(botonAsiento9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonAsiento9Layout.createSequentialGroup()
+            .addGroup(botonAsientoOnceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(botonAsientoOnceLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(numeroAsiento10)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        contenedorAsientos.add(botonAsiento9, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 40, 30));
+        contenedorAsientos.add(botonAsientoOnce, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 40, 30));
 
-        botonAsiento8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        botonAsientoDoce.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         numeroAsiento11.setForeground(new java.awt.Color(255, 255, 255));
         numeroAsiento11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         numeroAsiento11.setText("12");
 
-        javax.swing.GroupLayout botonAsiento8Layout = new javax.swing.GroupLayout(botonAsiento8);
-        botonAsiento8.setLayout(botonAsiento8Layout);
-        botonAsiento8Layout.setHorizontalGroup(
-            botonAsiento8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout botonAsientoDoceLayout = new javax.swing.GroupLayout(botonAsientoDoce);
+        botonAsientoDoce.setLayout(botonAsientoDoceLayout);
+        botonAsientoDoceLayout.setHorizontalGroup(
+            botonAsientoDoceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 38, Short.MAX_VALUE)
-            .addGroup(botonAsiento8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonAsiento8Layout.createSequentialGroup()
+            .addGroup(botonAsientoDoceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(botonAsientoDoceLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(numeroAsiento11)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
-        botonAsiento8Layout.setVerticalGroup(
-            botonAsiento8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        botonAsientoDoceLayout.setVerticalGroup(
+            botonAsientoDoceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 28, Short.MAX_VALUE)
-            .addGroup(botonAsiento8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonAsiento8Layout.createSequentialGroup()
+            .addGroup(botonAsientoDoceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(botonAsientoDoceLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(numeroAsiento11)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        contenedorAsientos.add(botonAsiento8, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 40, -1));
+        contenedorAsientos.add(botonAsientoDoce, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 40, -1));
 
-        botonAsiento10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        botonAsientoNueve.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         numeroAsiento8.setForeground(new java.awt.Color(255, 255, 255));
         numeroAsiento8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         numeroAsiento8.setText("9");
 
-        javax.swing.GroupLayout botonAsiento10Layout = new javax.swing.GroupLayout(botonAsiento10);
-        botonAsiento10.setLayout(botonAsiento10Layout);
-        botonAsiento10Layout.setHorizontalGroup(
-            botonAsiento10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout botonAsientoNueveLayout = new javax.swing.GroupLayout(botonAsientoNueve);
+        botonAsientoNueve.setLayout(botonAsientoNueveLayout);
+        botonAsientoNueveLayout.setHorizontalGroup(
+            botonAsientoNueveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 38, Short.MAX_VALUE)
-            .addGroup(botonAsiento10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonAsiento10Layout.createSequentialGroup()
+            .addGroup(botonAsientoNueveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(botonAsientoNueveLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(numeroAsiento8)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
-        botonAsiento10Layout.setVerticalGroup(
-            botonAsiento10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        botonAsientoNueveLayout.setVerticalGroup(
+            botonAsientoNueveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 28, Short.MAX_VALUE)
-            .addGroup(botonAsiento10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonAsiento10Layout.createSequentialGroup()
+            .addGroup(botonAsientoNueveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(botonAsientoNueveLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(numeroAsiento8)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        contenedorAsientos.add(botonAsiento10, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 40, 30));
+        contenedorAsientos.add(botonAsientoNueve, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 40, 30));
 
-        botonAsiento11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        botonAsientoDiez.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         numeroAsiento9.setForeground(new java.awt.Color(255, 255, 255));
         numeroAsiento9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         numeroAsiento9.setText("10");
 
-        javax.swing.GroupLayout botonAsiento11Layout = new javax.swing.GroupLayout(botonAsiento11);
-        botonAsiento11.setLayout(botonAsiento11Layout);
-        botonAsiento11Layout.setHorizontalGroup(
-            botonAsiento11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout botonAsientoDiezLayout = new javax.swing.GroupLayout(botonAsientoDiez);
+        botonAsientoDiez.setLayout(botonAsientoDiezLayout);
+        botonAsientoDiezLayout.setHorizontalGroup(
+            botonAsientoDiezLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 38, Short.MAX_VALUE)
-            .addGroup(botonAsiento11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonAsiento11Layout.createSequentialGroup()
+            .addGroup(botonAsientoDiezLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(botonAsientoDiezLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(numeroAsiento9)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
-        botonAsiento11Layout.setVerticalGroup(
-            botonAsiento11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        botonAsientoDiezLayout.setVerticalGroup(
+            botonAsientoDiezLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 28, Short.MAX_VALUE)
-            .addGroup(botonAsiento11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonAsiento11Layout.createSequentialGroup()
+            .addGroup(botonAsientoDiezLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(botonAsientoDiezLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(numeroAsiento9)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        contenedorAsientos.add(botonAsiento11, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, 40, 30));
+        contenedorAsientos.add(botonAsientoDiez, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, 40, 30));
 
-        botonAsiento12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        botonAsientoDiesciseis.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         numeroAsiento15.setForeground(new java.awt.Color(255, 255, 255));
         numeroAsiento15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         numeroAsiento15.setText("16");
 
-        javax.swing.GroupLayout botonAsiento12Layout = new javax.swing.GroupLayout(botonAsiento12);
-        botonAsiento12.setLayout(botonAsiento12Layout);
-        botonAsiento12Layout.setHorizontalGroup(
-            botonAsiento12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout botonAsientoDiesciseisLayout = new javax.swing.GroupLayout(botonAsientoDiesciseis);
+        botonAsientoDiesciseis.setLayout(botonAsientoDiesciseisLayout);
+        botonAsientoDiesciseisLayout.setHorizontalGroup(
+            botonAsientoDiesciseisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 28, Short.MAX_VALUE)
-            .addGroup(botonAsiento12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonAsiento12Layout.createSequentialGroup()
+            .addGroup(botonAsientoDiesciseisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(botonAsientoDiesciseisLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(numeroAsiento15)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
-        botonAsiento12Layout.setVerticalGroup(
-            botonAsiento12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        botonAsientoDiesciseisLayout.setVerticalGroup(
+            botonAsientoDiesciseisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 28, Short.MAX_VALUE)
-            .addGroup(botonAsiento12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonAsiento12Layout.createSequentialGroup()
+            .addGroup(botonAsientoDiesciseisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(botonAsientoDiesciseisLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(numeroAsiento15)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        contenedorAsientos.add(botonAsiento12, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, -1, -1));
+        contenedorAsientos.add(botonAsientoDiesciseis, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, -1, -1));
 
-        botonAsiento13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        botonAsientoQuince.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         numeroAsiento14.setForeground(new java.awt.Color(255, 255, 255));
         numeroAsiento14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         numeroAsiento14.setText("15");
 
-        javax.swing.GroupLayout botonAsiento13Layout = new javax.swing.GroupLayout(botonAsiento13);
-        botonAsiento13.setLayout(botonAsiento13Layout);
-        botonAsiento13Layout.setHorizontalGroup(
-            botonAsiento13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout botonAsientoQuinceLayout = new javax.swing.GroupLayout(botonAsientoQuince);
+        botonAsientoQuince.setLayout(botonAsientoQuinceLayout);
+        botonAsientoQuinceLayout.setHorizontalGroup(
+            botonAsientoQuinceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 28, Short.MAX_VALUE)
-            .addGroup(botonAsiento13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonAsiento13Layout.createSequentialGroup()
+            .addGroup(botonAsientoQuinceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(botonAsientoQuinceLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(numeroAsiento14)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
-        botonAsiento13Layout.setVerticalGroup(
-            botonAsiento13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        botonAsientoQuinceLayout.setVerticalGroup(
+            botonAsientoQuinceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 28, Short.MAX_VALUE)
-            .addGroup(botonAsiento13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonAsiento13Layout.createSequentialGroup()
+            .addGroup(botonAsientoQuinceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(botonAsientoQuinceLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(numeroAsiento14)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        contenedorAsientos.add(botonAsiento13, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, -1, -1));
+        contenedorAsientos.add(botonAsientoQuince, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, -1, -1));
 
-        botonAsiento14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        botonAsientoCatorce.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         numeroAsiento13.setForeground(new java.awt.Color(255, 255, 255));
         numeroAsiento13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         numeroAsiento13.setText("14");
 
-        javax.swing.GroupLayout botonAsiento14Layout = new javax.swing.GroupLayout(botonAsiento14);
-        botonAsiento14.setLayout(botonAsiento14Layout);
-        botonAsiento14Layout.setHorizontalGroup(
-            botonAsiento14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout botonAsientoCatorceLayout = new javax.swing.GroupLayout(botonAsientoCatorce);
+        botonAsientoCatorce.setLayout(botonAsientoCatorceLayout);
+        botonAsientoCatorceLayout.setHorizontalGroup(
+            botonAsientoCatorceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 30, Short.MAX_VALUE)
-            .addGroup(botonAsiento14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonAsiento14Layout.createSequentialGroup()
+            .addGroup(botonAsientoCatorceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(botonAsientoCatorceLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(numeroAsiento13)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
-        botonAsiento14Layout.setVerticalGroup(
-            botonAsiento14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        botonAsientoCatorceLayout.setVerticalGroup(
+            botonAsientoCatorceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 28, Short.MAX_VALUE)
-            .addGroup(botonAsiento14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonAsiento14Layout.createSequentialGroup()
+            .addGroup(botonAsientoCatorceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(botonAsientoCatorceLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(numeroAsiento13)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        contenedorAsientos.add(botonAsiento14, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, -1, -1));
+        contenedorAsientos.add(botonAsientoCatorce, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, -1, -1));
 
-        botonAsiento15.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        botonAsientoTrece.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         numeroAsiento12.setForeground(new java.awt.Color(255, 255, 255));
         numeroAsiento12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         numeroAsiento12.setText("13");
 
-        javax.swing.GroupLayout botonAsiento15Layout = new javax.swing.GroupLayout(botonAsiento15);
-        botonAsiento15.setLayout(botonAsiento15Layout);
-        botonAsiento15Layout.setHorizontalGroup(
-            botonAsiento15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout botonAsientoTreceLayout = new javax.swing.GroupLayout(botonAsientoTrece);
+        botonAsientoTrece.setLayout(botonAsientoTreceLayout);
+        botonAsientoTreceLayout.setHorizontalGroup(
+            botonAsientoTreceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 28, Short.MAX_VALUE)
-            .addGroup(botonAsiento15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonAsiento15Layout.createSequentialGroup()
+            .addGroup(botonAsientoTreceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(botonAsientoTreceLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(numeroAsiento12)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
-        botonAsiento15Layout.setVerticalGroup(
-            botonAsiento15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        botonAsientoTreceLayout.setVerticalGroup(
+            botonAsientoTreceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 28, Short.MAX_VALUE)
-            .addGroup(botonAsiento15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonAsiento15Layout.createSequentialGroup()
+            .addGroup(botonAsientoTreceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(botonAsientoTreceLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(numeroAsiento12)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        contenedorAsientos.add(botonAsiento15, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, -1, -1));
+        contenedorAsientos.add(botonAsientoTrece, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, -1, -1));
 
-        botonAsiento17.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        botonAsientoVeinte.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         numeroAsiento19.setForeground(new java.awt.Color(255, 255, 255));
         numeroAsiento19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         numeroAsiento19.setText("20");
 
-        javax.swing.GroupLayout botonAsiento17Layout = new javax.swing.GroupLayout(botonAsiento17);
-        botonAsiento17.setLayout(botonAsiento17Layout);
-        botonAsiento17Layout.setHorizontalGroup(
-            botonAsiento17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout botonAsientoVeinteLayout = new javax.swing.GroupLayout(botonAsientoVeinte);
+        botonAsientoVeinte.setLayout(botonAsientoVeinteLayout);
+        botonAsientoVeinteLayout.setHorizontalGroup(
+            botonAsientoVeinteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 30, Short.MAX_VALUE)
-            .addGroup(botonAsiento17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonAsiento17Layout.createSequentialGroup()
+            .addGroup(botonAsientoVeinteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(botonAsientoVeinteLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(numeroAsiento19)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
-        botonAsiento17Layout.setVerticalGroup(
-            botonAsiento17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        botonAsientoVeinteLayout.setVerticalGroup(
+            botonAsientoVeinteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 28, Short.MAX_VALUE)
-            .addGroup(botonAsiento17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonAsiento17Layout.createSequentialGroup()
+            .addGroup(botonAsientoVeinteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(botonAsientoVeinteLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(numeroAsiento19)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        contenedorAsientos.add(botonAsiento17, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 160, -1, 30));
+        contenedorAsientos.add(botonAsientoVeinte, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 160, -1, 30));
 
-        botonAsiento16.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        botonAsientoDiescinueve.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         numeroAsiento18.setForeground(new java.awt.Color(255, 255, 255));
         numeroAsiento18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         numeroAsiento18.setText("19");
 
-        javax.swing.GroupLayout botonAsiento16Layout = new javax.swing.GroupLayout(botonAsiento16);
-        botonAsiento16.setLayout(botonAsiento16Layout);
-        botonAsiento16Layout.setHorizontalGroup(
-            botonAsiento16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout botonAsientoDiescinueveLayout = new javax.swing.GroupLayout(botonAsientoDiescinueve);
+        botonAsientoDiescinueve.setLayout(botonAsientoDiescinueveLayout);
+        botonAsientoDiescinueveLayout.setHorizontalGroup(
+            botonAsientoDiescinueveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 28, Short.MAX_VALUE)
-            .addGroup(botonAsiento16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonAsiento16Layout.createSequentialGroup()
+            .addGroup(botonAsientoDiescinueveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(botonAsientoDiescinueveLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(numeroAsiento18)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
-        botonAsiento16Layout.setVerticalGroup(
-            botonAsiento16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        botonAsientoDiescinueveLayout.setVerticalGroup(
+            botonAsientoDiescinueveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 28, Short.MAX_VALUE)
-            .addGroup(botonAsiento16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonAsiento16Layout.createSequentialGroup()
+            .addGroup(botonAsientoDiescinueveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(botonAsientoDiescinueveLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(numeroAsiento18)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        contenedorAsientos.add(botonAsiento16, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, -1, -1));
+        contenedorAsientos.add(botonAsientoDiescinueve, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, -1, -1));
 
-        botonAsiento19.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        botonAsientoDiescisiete.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         numeroAsiento16.setForeground(new java.awt.Color(255, 255, 255));
         numeroAsiento16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         numeroAsiento16.setText("17");
 
-        javax.swing.GroupLayout botonAsiento19Layout = new javax.swing.GroupLayout(botonAsiento19);
-        botonAsiento19.setLayout(botonAsiento19Layout);
-        botonAsiento19Layout.setHorizontalGroup(
-            botonAsiento19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout botonAsientoDiescisieteLayout = new javax.swing.GroupLayout(botonAsientoDiescisiete);
+        botonAsientoDiescisiete.setLayout(botonAsientoDiescisieteLayout);
+        botonAsientoDiescisieteLayout.setHorizontalGroup(
+            botonAsientoDiescisieteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 30, Short.MAX_VALUE)
-            .addGroup(botonAsiento19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonAsiento19Layout.createSequentialGroup()
+            .addGroup(botonAsientoDiescisieteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(botonAsientoDiescisieteLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(numeroAsiento16)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
-        botonAsiento19Layout.setVerticalGroup(
-            botonAsiento19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        botonAsientoDiescisieteLayout.setVerticalGroup(
+            botonAsientoDiescisieteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 28, Short.MAX_VALUE)
-            .addGroup(botonAsiento19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonAsiento19Layout.createSequentialGroup()
+            .addGroup(botonAsientoDiescisieteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(botonAsientoDiescisieteLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(numeroAsiento16)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        contenedorAsientos.add(botonAsiento19, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, -1, 30));
+        contenedorAsientos.add(botonAsientoDiescisiete, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, -1, 30));
 
-        botonAsiento18.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        botonAsientoDiesciocho.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         numeroAsiento17.setForeground(new java.awt.Color(255, 255, 255));
         numeroAsiento17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         numeroAsiento17.setText("18");
 
-        javax.swing.GroupLayout botonAsiento18Layout = new javax.swing.GroupLayout(botonAsiento18);
-        botonAsiento18.setLayout(botonAsiento18Layout);
-        botonAsiento18Layout.setHorizontalGroup(
-            botonAsiento18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout botonAsientoDiesciochoLayout = new javax.swing.GroupLayout(botonAsientoDiesciocho);
+        botonAsientoDiesciocho.setLayout(botonAsientoDiesciochoLayout);
+        botonAsientoDiesciochoLayout.setHorizontalGroup(
+            botonAsientoDiesciochoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 28, Short.MAX_VALUE)
-            .addGroup(botonAsiento18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonAsiento18Layout.createSequentialGroup()
+            .addGroup(botonAsientoDiesciochoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(botonAsientoDiesciochoLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(numeroAsiento17)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
-        botonAsiento18Layout.setVerticalGroup(
-            botonAsiento18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        botonAsientoDiesciochoLayout.setVerticalGroup(
+            botonAsientoDiesciochoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 28, Short.MAX_VALUE)
-            .addGroup(botonAsiento18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonAsiento18Layout.createSequentialGroup()
+            .addGroup(botonAsientoDiesciochoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(botonAsientoDiesciochoLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(numeroAsiento17)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        contenedorAsientos.add(botonAsiento18, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, -1, -1));
+        contenedorAsientos.add(botonAsientoDiesciocho, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, -1, -1));
 
-        botonAsiento20.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        botonAsientoVeintitres.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         numeroAsiento22.setForeground(new java.awt.Color(255, 255, 255));
         numeroAsiento22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         numeroAsiento22.setText("23");
 
-        javax.swing.GroupLayout botonAsiento20Layout = new javax.swing.GroupLayout(botonAsiento20);
-        botonAsiento20.setLayout(botonAsiento20Layout);
-        botonAsiento20Layout.setHorizontalGroup(
-            botonAsiento20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout botonAsientoVeintitresLayout = new javax.swing.GroupLayout(botonAsientoVeintitres);
+        botonAsientoVeintitres.setLayout(botonAsientoVeintitresLayout);
+        botonAsientoVeintitresLayout.setHorizontalGroup(
+            botonAsientoVeintitresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 30, Short.MAX_VALUE)
-            .addGroup(botonAsiento20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonAsiento20Layout.createSequentialGroup()
+            .addGroup(botonAsientoVeintitresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(botonAsientoVeintitresLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(numeroAsiento22)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
-        botonAsiento20Layout.setVerticalGroup(
-            botonAsiento20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        botonAsientoVeintitresLayout.setVerticalGroup(
+            botonAsientoVeintitresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 28, Short.MAX_VALUE)
-            .addGroup(botonAsiento20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonAsiento20Layout.createSequentialGroup()
+            .addGroup(botonAsientoVeintitresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(botonAsientoVeintitresLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(numeroAsiento22)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        contenedorAsientos.add(botonAsiento20, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, -1, 30));
+        contenedorAsientos.add(botonAsientoVeintitres, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, -1, 30));
 
-        botonAsiento21.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        botonAsientoVeinticuatro.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         numeroAsiento23.setForeground(new java.awt.Color(255, 255, 255));
         numeroAsiento23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         numeroAsiento23.setText("24");
 
-        javax.swing.GroupLayout botonAsiento21Layout = new javax.swing.GroupLayout(botonAsiento21);
-        botonAsiento21.setLayout(botonAsiento21Layout);
-        botonAsiento21Layout.setHorizontalGroup(
-            botonAsiento21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout botonAsientoVeinticuatroLayout = new javax.swing.GroupLayout(botonAsientoVeinticuatro);
+        botonAsientoVeinticuatro.setLayout(botonAsientoVeinticuatroLayout);
+        botonAsientoVeinticuatroLayout.setHorizontalGroup(
+            botonAsientoVeinticuatroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 28, Short.MAX_VALUE)
-            .addGroup(botonAsiento21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonAsiento21Layout.createSequentialGroup()
+            .addGroup(botonAsientoVeinticuatroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(botonAsientoVeinticuatroLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(numeroAsiento23)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
-        botonAsiento21Layout.setVerticalGroup(
-            botonAsiento21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        botonAsientoVeinticuatroLayout.setVerticalGroup(
+            botonAsientoVeinticuatroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 28, Short.MAX_VALUE)
-            .addGroup(botonAsiento21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonAsiento21Layout.createSequentialGroup()
+            .addGroup(botonAsientoVeinticuatroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(botonAsientoVeinticuatroLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(numeroAsiento23)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        contenedorAsientos.add(botonAsiento21, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 160, -1, -1));
+        contenedorAsientos.add(botonAsientoVeinticuatro, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 160, -1, -1));
 
-        botonAsiento22.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        botonAsientoVeintiuno.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         numeroAsiento20.setForeground(new java.awt.Color(255, 255, 255));
         numeroAsiento20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         numeroAsiento20.setText("21");
 
-        javax.swing.GroupLayout botonAsiento22Layout = new javax.swing.GroupLayout(botonAsiento22);
-        botonAsiento22.setLayout(botonAsiento22Layout);
-        botonAsiento22Layout.setHorizontalGroup(
-            botonAsiento22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout botonAsientoVeintiunoLayout = new javax.swing.GroupLayout(botonAsientoVeintiuno);
+        botonAsientoVeintiuno.setLayout(botonAsientoVeintiunoLayout);
+        botonAsientoVeintiunoLayout.setHorizontalGroup(
+            botonAsientoVeintiunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 28, Short.MAX_VALUE)
-            .addGroup(botonAsiento22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonAsiento22Layout.createSequentialGroup()
+            .addGroup(botonAsientoVeintiunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(botonAsientoVeintiunoLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(numeroAsiento20)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
-        botonAsiento22Layout.setVerticalGroup(
-            botonAsiento22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        botonAsientoVeintiunoLayout.setVerticalGroup(
+            botonAsientoVeintiunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 28, Short.MAX_VALUE)
-            .addGroup(botonAsiento22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonAsiento22Layout.createSequentialGroup()
+            .addGroup(botonAsientoVeintiunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(botonAsientoVeintiunoLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(numeroAsiento20)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        contenedorAsientos.add(botonAsiento22, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, -1, -1));
+        contenedorAsientos.add(botonAsientoVeintiuno, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, -1, -1));
 
-        botonAsiento23.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        botonAsientoVeintidos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         numeroAsiento21.setForeground(new java.awt.Color(255, 255, 255));
         numeroAsiento21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         numeroAsiento21.setText("22");
 
-        javax.swing.GroupLayout botonAsiento23Layout = new javax.swing.GroupLayout(botonAsiento23);
-        botonAsiento23.setLayout(botonAsiento23Layout);
-        botonAsiento23Layout.setHorizontalGroup(
-            botonAsiento23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout botonAsientoVeintidosLayout = new javax.swing.GroupLayout(botonAsientoVeintidos);
+        botonAsientoVeintidos.setLayout(botonAsientoVeintidosLayout);
+        botonAsientoVeintidosLayout.setHorizontalGroup(
+            botonAsientoVeintidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 28, Short.MAX_VALUE)
-            .addGroup(botonAsiento23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonAsiento23Layout.createSequentialGroup()
+            .addGroup(botonAsientoVeintidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(botonAsientoVeintidosLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(numeroAsiento21)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
-        botonAsiento23Layout.setVerticalGroup(
-            botonAsiento23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        botonAsientoVeintidosLayout.setVerticalGroup(
+            botonAsientoVeintidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 28, Short.MAX_VALUE)
-            .addGroup(botonAsiento23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(botonAsiento23Layout.createSequentialGroup()
+            .addGroup(botonAsientoVeintidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(botonAsientoVeintidosLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(numeroAsiento21)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        contenedorAsientos.add(botonAsiento23, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, -1, -1));
+        contenedorAsientos.add(botonAsientoVeintidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, -1, -1));
 
-        BackGround.add(contenedorAsientos, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 340, 200));
+        BackGround.add(contenedorAsientos, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 350, 200));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -842,44 +863,42 @@ public class AsientosDisponibles extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botonAsiento6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAsiento6MouseClicked
-        seleccionarAsiento(botonAsiento6);
-    }//GEN-LAST:event_botonAsiento6MouseClicked
+    private void botonAsientoCincoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAsientoCincoMouseClicked
+        seleccionarAsiento(botonAsientoCinco);
+    }//GEN-LAST:event_botonAsientoCincoMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BackGround;
     private javax.swing.JPanel Footer;
     private javax.swing.JPanel Header;
-    private javax.swing.JPanel botonAsiento10;
-    private javax.swing.JPanel botonAsiento11;
-    private javax.swing.JPanel botonAsiento12;
-    private javax.swing.JPanel botonAsiento13;
-    private javax.swing.JPanel botonAsiento14;
-    private javax.swing.JPanel botonAsiento15;
-    private javax.swing.JPanel botonAsiento16;
-    private javax.swing.JPanel botonAsiento17;
-    private javax.swing.JPanel botonAsiento18;
-    private javax.swing.JPanel botonAsiento19;
     private javax.swing.JPanel botonAsiento2;
-    private javax.swing.JPanel botonAsiento20;
-    private javax.swing.JPanel botonAsiento21;
-    private javax.swing.JPanel botonAsiento22;
-    private javax.swing.JPanel botonAsiento23;
     private javax.swing.JPanel botonAsiento3;
-    private javax.swing.JPanel botonAsiento4;
-    private javax.swing.JPanel botonAsiento5;
-    private javax.swing.JPanel botonAsiento6;
-    private javax.swing.JPanel botonAsiento7;
-    private javax.swing.JPanel botonAsiento8;
-    private javax.swing.JPanel botonAsiento9;
+    private javax.swing.JPanel botonAsientoCatorce;
+    private javax.swing.JPanel botonAsientoCinco;
+    private javax.swing.JPanel botonAsientoDiescinueve;
+    private javax.swing.JPanel botonAsientoDiesciocho;
+    private javax.swing.JPanel botonAsientoDiesciseis;
+    private javax.swing.JPanel botonAsientoDiescisiete;
+    private javax.swing.JPanel botonAsientoDiez;
+    private javax.swing.JPanel botonAsientoDoce;
+    private javax.swing.JPanel botonAsientoNueve;
+    private javax.swing.JPanel botonAsientoOcho;
+    private javax.swing.JPanel botonAsientoOnce;
+    private javax.swing.JPanel botonAsientoQuince;
+    private javax.swing.JPanel botonAsientoSeis;
+    private javax.swing.JPanel botonAsientoSiete;
+    private javax.swing.JPanel botonAsientoTrece;
     private javax.swing.JPanel botonAsientoUno;
     private javax.swing.JPanel botonAsientoUno1;
+    private javax.swing.JPanel botonAsientoVeinte;
+    private javax.swing.JPanel botonAsientoVeinticuatro;
+    private javax.swing.JPanel botonAsientoVeintidos;
+    private javax.swing.JPanel botonAsientoVeintitres;
+    private javax.swing.JPanel botonAsientoVeintiuno;
     private javax.swing.JPanel contenedorAsientos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel numeroAsiento;
-    private javax.swing.JLabel numeroAsiento1;
     private javax.swing.JLabel numeroAsiento10;
     private javax.swing.JLabel numeroAsiento11;
     private javax.swing.JLabel numeroAsiento12;
@@ -890,49 +909,51 @@ public class AsientosDisponibles extends javax.swing.JFrame {
     private javax.swing.JLabel numeroAsiento17;
     private javax.swing.JLabel numeroAsiento18;
     private javax.swing.JLabel numeroAsiento19;
-    private javax.swing.JLabel numeroAsiento2;
     private javax.swing.JLabel numeroAsiento20;
     private javax.swing.JLabel numeroAsiento21;
     private javax.swing.JLabel numeroAsiento22;
     private javax.swing.JLabel numeroAsiento23;
-    private javax.swing.JLabel numeroAsiento3;
-    private javax.swing.JLabel numeroAsiento4;
     private javax.swing.JLabel numeroAsiento5;
     private javax.swing.JLabel numeroAsiento6;
     private javax.swing.JLabel numeroAsiento7;
     private javax.swing.JLabel numeroAsiento8;
     private javax.swing.JLabel numeroAsiento9;
+    private javax.swing.JLabel numeroAsientoCuatro;
+    private javax.swing.JLabel numeroAsientoDos;
+    private javax.swing.JLabel numeroAsientoSeis;
+    private javax.swing.JLabel numeroAsientoTres;
+    private javax.swing.JLabel numeroAsientoUno;
     // End of variables declaration//GEN-END:variables
 
     private void seleccionarAsiento(JPanel panel) {
 
         // Obtener el estado actual del asiento desde el HashMap
-    EstadoAsiento estadoActual = mapaEstadosAsientos.get(panel);
+        EstadoAsiento estadoActual = mapaEstadosAsientos.get(panel);
 
-    // Comprobar el estado y realizar las acciones correspondientes
-    switch (estadoActual) {
-        case LIBRE:
-            // Si está libre, cambiar a seleccionado
-            panel.setBackground(new Color(51, 204, 255)); // Azul
-            mapaEstadosAsientos.put(panel, EstadoAsiento.SELECCIONADO); // Actualizar el estado a SELECCIONADO
-            break;
+        // Comprobar el estado y realizar las acciones correspondientes
+        switch (estadoActual) {
+            case LIBRE:
+                // Si está libre, cambiar a seleccionado
+                panel.setBackground(new Color(51, 204, 255)); // Azul
+                mapaEstadosAsientos.put(panel, EstadoAsiento.SELECCIONADO); // Actualizar el estado a SELECCIONADO
+                break;
 
-        case SELECCIONADO:
-            // Si está seleccionado, cambiar a libre
-            panel.setBackground(new Color(242, 242, 242)); // Gris
-            mapaEstadosAsientos.put(panel, EstadoAsiento.LIBRE); // Actualizar el estado a LIBRE
-            break;
+            case SELECCIONADO:
+                // Si está seleccionado, cambiar a libre
+                panel.setBackground(new Color(242, 242, 242)); // Gris
+                mapaEstadosAsientos.put(panel, EstadoAsiento.LIBRE); // Actualizar el estado a LIBRE
+                break;
 
-        case OCUPADO:
-            // Si está ocupado, mostrar un mensaje
-            panel.setBackground(new Color(153, 0, 0)); // Gris
-            JOptionPane.showMessageDialog(null, "El asiento que seleccionaste ya está ocupado.");
-            break;
-    }
+            case OCUPADO:
+                // Si está ocupado, mostrar un mensaje
+                panel.setBackground(new Color(153, 0, 0)); // Gris
+                JOptionPane.showMessageDialog(null, "El asiento que seleccionaste ya está ocupado.");
+                break;
+        }
 
-    // Forzar la actualización visual
-    panel.revalidate();
-    panel.repaint();
+        // Forzar la actualización visual
+        panel.revalidate();
+        panel.repaint();
 
     }
 

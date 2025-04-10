@@ -5,8 +5,10 @@
 package Fachada;
 
 import Control.Control;
+import Ex.CompraBoletoException;
 import Interfaz.IComprarBoleto;
 import itson.rutappdto.AsientoDTO;
+import itson.rutappdto.CamionDTO;
 import java.util.List;
 
 /**
@@ -37,8 +39,8 @@ public class ComprarBoleto implements IComprarBoleto {
     }
 
     @Override
-    public List<AsientoDTO> mostrarListaAsientos() {
-        return control.mostrarListaAsientos();
+    public List<AsientoDTO> mostrarListaAsientos(CamionDTO camion) throws CompraBoletoException {
+        return control.mostrarListaAsientos(camion);
     }
 
     @Override
