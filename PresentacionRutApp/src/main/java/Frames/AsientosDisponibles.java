@@ -31,8 +31,10 @@ public class AsientosDisponibles extends javax.swing.JFrame {
 
     // Crear un HashMap que relacione cada panel con su estado
     private Map<JPanel, EstadoAsiento> mapaEstadosAsientos = new HashMap<>();
+
     /**
      * Creates new form ComprarViaje
+     *
      * @param camion
      */
     public AsientosDisponibles(CamionDTO camion) {
@@ -69,7 +71,6 @@ public class AsientosDisponibles extends javax.swing.JFrame {
         marcarAsientosOcupados(camionDTO.getListaAsiento());
     }
 
-
 // Inicializar el HashMap de asientos con sus números y paneles
     private void inicializarMapaAsientos() {
         mapaAsientos.put("9", botonAsientoNueve);
@@ -97,19 +98,6 @@ public class AsientosDisponibles extends javax.swing.JFrame {
         mapaAsientos.put("1", botonAsientoUno);
     }
 
-    // Devuelve una lista de los paneles que están ocupados
-    private List<JPanel> obtenerAsientosOcupados() {
-        List<JPanel> ocupados = new java.util.ArrayList<>();
-
-        for (Map.Entry<JPanel, EstadoAsiento> entry : mapaEstadosAsientos.entrySet()) {
-            if (entry.getValue() == EstadoAsiento.OCUPADO) {
-                ocupados.add(entry.getKey());
-            }
-        }
-
-        return ocupados;
-    }
-
     // Método para marcar los asientos ocupados
     private void marcarAsientosOcupados(List<AsientoDTO> listaAsientos) {
         for (AsientoDTO asiento : listaAsientos) {
@@ -119,6 +107,8 @@ public class AsientosDisponibles extends javax.swing.JFrame {
                 JPanel panelAsiento = mapaAsientos.get(numeroAsiento);  // Obtener el panel correspondiente al número
                 if (panelAsiento != null) {
                     panelAsiento.setBackground(Color.RED);  // Pintamos el panel de rojo si está ocupado
+                    mapaEstadosAsientos.put(panelAsiento, EstadoAsiento.OCUPADO);
+
                 }
             }
         }
@@ -992,8 +982,6 @@ public class AsientosDisponibles extends javax.swing.JFrame {
                 break;
 
             case OCUPADO:
-                // Si está ocupado, mostrar un mensaje
-                panel.setBackground(new Color(153, 0, 0)); // Gris
                 JOptionPane.showMessageDialog(null, "El asiento que seleccionaste ya está ocupado.");
                 break;
         }
