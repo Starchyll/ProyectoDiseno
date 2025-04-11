@@ -1,5 +1,6 @@
 Frames\InicioSesion.class
 Frames\BuscarViaje$2.class
+Control\CordinadorPresentacion$1.class
 Frames\ComprarBoleto$2.class
 Frames\ViajesDisponibles$2.class
 Frames\ResumenCompra$1.class

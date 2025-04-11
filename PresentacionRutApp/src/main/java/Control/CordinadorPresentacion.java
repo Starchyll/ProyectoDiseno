@@ -11,15 +11,23 @@ import Frames.BuscarViaje;
 import Frames.MainMenu;
 import Frames.ViajesDisponibles;
 import itson.consultardisponibilidad.Interfaz.IConsultarDisponibilidad;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 /**
  *
  * @author chris
  */
 public class CordinadorPresentacion {
-    
+
+    private Timer temporizador; // Timer de swing
+    private boolean contadorIniciado = false;
+    private final int DURACION_CONTADOR = 5 * 60 * 1000;
+
     private IConsultarDisponibilidad consultarDisponibilidad;
 
     private static CordinadorPresentacion instancia;
@@ -50,11 +58,10 @@ public class CordinadorPresentacion {
 //        ViajesDisponibles forma = new ViajesDisponibles(viajes);
 //        forma.setVisible(true);
 //    }
-    
-    public void abrirAsientosDisponibles(CamionDTO camion){
+    public void abrirAsientosDisponibles(CamionDTO camion) {
         AsientosDisponibles formAsientosDisponibles = new AsientosDisponibles(camion);
         formAsientosDisponibles.setVisible(true);
-        
+
     }
 
     public List<String> buscarOrigenesDisponibles() {
@@ -71,4 +78,26 @@ public class CordinadorPresentacion {
         ventana.setVisible(true);
     }
 
+    public void iniciarTemporizador(Runnable reiniciarAsientosCallback) {
+        if (contadorIniciado) {
+            return;
+        }
+
+        contadorIniciado = true;
+        temporizador = new Timer(DURACION_CONTADOR, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                temporizador.stop();
+                contadorIniciado = false;
+
+                JOptionPane.showMessageDialog(null, "El tiempo se ha acabado. Inténtelo de nuevo.");
+
+                if (reiniciarAsientosCallback != null) {
+                    reiniciarAsientosCallback.run();
+                }
+            }
+        });
+        temporizador.setRepeats(false);
+        temporizador.start();
+    }
 }

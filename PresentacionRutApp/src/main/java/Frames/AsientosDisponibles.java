@@ -1,5 +1,6 @@
 package Frames;
 
+import Control.CordinadorPresentacion;
 import enumm.estadoAsiento;
 import itson.rutappdto.AsientoDTO;
 import itson.rutappdto.CamionDTO;
@@ -18,7 +19,7 @@ import javax.swing.JPanel;
  */
 /**
  *
- * @author mmax2
+ * @author BusSoft
  */
 public class AsientosDisponibles extends javax.swing.JFrame {
 
@@ -31,6 +32,8 @@ public class AsientosDisponibles extends javax.swing.JFrame {
 
     // Crear un HashMap que relacione cada panel con su estado
     private Map<JPanel, EstadoAsiento> mapaEstadosAsientos = new HashMap<>();
+    private Map<JPanel, String> mapaNombresPasajeros = new HashMap<>();
+    private CordinadorPresentacion coordinador;
 
     /**
      * Creates new form ComprarViaje
@@ -71,6 +74,18 @@ public class AsientosDisponibles extends javax.swing.JFrame {
         marcarAsientosOcupados(camionDTO.getListaAsiento());
     }
 
+    private void reiniciarAsientosSeleccionados() {
+        for (Map.Entry<JPanel, EstadoAsiento> entry : mapaEstadosAsientos.entrySet()) {
+            if (entry.getValue() == EstadoAsiento.SELECCIONADO) {
+                JPanel panel = entry.getKey();
+                panel.setBackground(new Color(242, 242, 242)); // Gris claro
+                mapaEstadosAsientos.put(panel, EstadoAsiento.LIBRE);
+            }
+        }
+        mapaNombresPasajeros.clear();
+        resumenTextArea.setText("");
+    }
+
 // Inicializar el HashMap de asientos con sus números y paneles
     private void inicializarMapaAsientos() {
         mapaAsientos.put("9", botonAsientoNueve);
@@ -108,7 +123,6 @@ public class AsientosDisponibles extends javax.swing.JFrame {
                 if (panelAsiento != null) {
                     panelAsiento.setBackground(Color.RED);  // Pintamos el panel de rojo si está ocupado
                     mapaEstadosAsientos.put(panelAsiento, EstadoAsiento.OCUPADO);
-
                 }
             }
         }
@@ -177,6 +191,8 @@ public class AsientosDisponibles extends javax.swing.JFrame {
         numeroAsiento20 = new javax.swing.JLabel();
         botonAsientoVeintidos = new javax.swing.JPanel();
         numeroAsiento21 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        resumenTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -222,7 +238,7 @@ public class AsientosDisponibles extends javax.swing.JFrame {
             .addGap(0, 60, Short.MAX_VALUE)
         );
 
-        BackGround.add(Footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 490, 500, -1));
+        BackGround.add(Footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 530, 500, 60));
 
         contenedorAsientos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -886,6 +902,15 @@ public class AsientosDisponibles extends javax.swing.JFrame {
 
         BackGround.add(contenedorAsientos, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 350, 200));
 
+        resumenTextArea.setEditable(false);
+        resumenTextArea.setColumns(20);
+        resumenTextArea.setLineWrap(true);
+        resumenTextArea.setRows(5);
+        resumenTextArea.setWrapStyleWord(true);
+        jScrollPane2.setViewportView(resumenTextArea);
+
+        BackGround.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, 360, 130));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -894,7 +919,9 @@ public class AsientosDisponibles extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(BackGround, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(BackGround, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -936,6 +963,7 @@ public class AsientosDisponibles extends javax.swing.JFrame {
     private javax.swing.JPanel contenedorAsientos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel numeroAsiento10;
     private javax.swing.JLabel numeroAsiento11;
     private javax.swing.JLabel numeroAsiento12;
@@ -960,6 +988,7 @@ public class AsientosDisponibles extends javax.swing.JFrame {
     private javax.swing.JLabel numeroAsientoSeis;
     private javax.swing.JLabel numeroAsientoTres;
     private javax.swing.JLabel numeroAsientoUno;
+    private javax.swing.JTextArea resumenTextArea;
     // End of variables declaration//GEN-END:variables
 
     private void seleccionarAsiento(JPanel panel) {
@@ -970,26 +999,63 @@ public class AsientosDisponibles extends javax.swing.JFrame {
         // Comprobar el estado y realizar las acciones correspondientes
         switch (estadoActual) {
             case LIBRE:
-                // Si está libre, cambiar a seleccionado
-                panel.setBackground(new Color(51, 204, 255)); // Azul
-                mapaEstadosAsientos.put(panel, EstadoAsiento.SELECCIONADO); // Actualizar el estado a SELECCIONADO
+                // Mostrar cuadro de diálogo para ingresar el nombre del pasajero
+                String nombrePasajero = JOptionPane.showInputDialog(
+                        this,
+                        "Ingresa el nombre del pasajero:",
+                        "Asignar Asiento",
+                        JOptionPane.PLAIN_MESSAGE
+                );
+
+                // Si el usuario ingresó un nombre válido
+                if (nombrePasajero != null && !nombrePasajero.trim().isEmpty()) {
+                    panel.setBackground(new Color(51, 204, 255)); // Azul
+                    mapaEstadosAsientos.put(panel, EstadoAsiento.SELECCIONADO); // Actualizar el estado
+                    mapaNombresPasajeros.put(panel, nombrePasajero.trim());// Guardar el nombre
+                    actualizarResumenAsientos();
+                }
+                coordinador.iniciarTemporizador(() -> reiniciarAsientosSeleccionados());
                 break;
 
             case SELECCIONADO:
                 // Si está seleccionado, cambiar a libre
                 panel.setBackground(new Color(242, 242, 242)); // Gris
-                mapaEstadosAsientos.put(panel, EstadoAsiento.LIBRE); // Actualizar el estado a LIBRE
+                mapaEstadosAsientos.put(panel, EstadoAsiento.LIBRE); // Actualizar el estado
+                mapaNombresPasajeros.remove(panel); // Eliminar el nombre del pasajero
                 break;
 
             case OCUPADO:
-                JOptionPane.showMessageDialog(null, "El asiento que seleccionaste ya está ocupado.");
+                JOptionPane.showMessageDialog(
+                        this,
+                        "El asiento que seleccionaste ya está ocupado.",
+                        "Asiento Ocupado",
+                        JOptionPane.WARNING_MESSAGE
+                );
                 break;
         }
 
         // Forzar la actualización visual
         panel.revalidate();
         panel.repaint();
-
     }
 
+    private void actualizarResumenAsientos() {
+        StringBuilder resumen = new StringBuilder();
+
+        for (Map.Entry<JPanel, String> entry : mapaNombresPasajeros.entrySet()) {
+            String nombre = entry.getValue();
+            // Buscamos el número de asiento basado en el panel
+            String numeroAsiento = mapaAsientos.entrySet().stream()
+                    .filter(e -> e.getValue().equals(entry.getKey()))
+                    .map(Map.Entry::getKey)
+                    .findFirst()
+                    .orElse("Desconocido");
+
+            resumen.append("Asiento ").append(numeroAsiento)
+                    .append(" ha sido asignado a: ")
+                    .append(nombre).append("\n");
+        }
+
+        resumenTextArea.setText(resumen.toString());
+    }
 }
