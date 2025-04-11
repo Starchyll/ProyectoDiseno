@@ -1,14 +1,14 @@
-C:\Users\mmax2\OneDrive\Documents\GitHub\ProyectoDiseno\PresentacionRutApp\src\main\java\Frames\InicioSesion.java
-C:\Users\mmax2\OneDrive\Documents\GitHub\ProyectoDiseno\PresentacionRutApp\src\main\java\Frames\MainMenu.java
-C:\Users\mmax2\OneDrive\Documents\GitHub\ProyectoDiseno\PresentacionRutApp\src\main\java\Clases\Render.java
-C:\Users\mmax2\OneDrive\Documents\GitHub\ProyectoDiseno\PresentacionRutApp\src\main\java\Interfaces\ITabla.java
-C:\Users\mmax2\OneDrive\Documents\GitHub\ProyectoDiseno\PresentacionRutApp\src\main\java\Frames\ResumenCompra.java
-C:\Users\mmax2\OneDrive\Documents\GitHub\ProyectoDiseno\PresentacionRutApp\src\main\java\Clases\Tabla.java
-C:\Users\mmax2\OneDrive\Documents\GitHub\ProyectoDiseno\PresentacionRutApp\src\main\java\Frames\BuscarViaje.java
-C:\Users\mmax2\OneDrive\Documents\GitHub\ProyectoDiseno\PresentacionRutApp\src\main\java\Frames\asientos.java
-C:\Users\mmax2\OneDrive\Documents\GitHub\ProyectoDiseno\PresentacionRutApp\src\main\java\Frames\ComprarBoleto.java
-C:\Users\mmax2\OneDrive\Documents\GitHub\ProyectoDiseno\PresentacionRutApp\src\main\java\Control\ControlNegocio.java
-C:\Users\mmax2\OneDrive\Documents\GitHub\ProyectoDiseno\PresentacionRutApp\src\main\java\Control\CordinadorPresentacion.java
-C:\Users\mmax2\OneDrive\Documents\GitHub\ProyectoDiseno\PresentacionRutApp\src\main\java\Frames\SistemaRutaApp.java
-C:\Users\mmax2\OneDrive\Documents\GitHub\ProyectoDiseno\PresentacionRutApp\src\main\java\Frames\ViajesDisponibles.java
-C:\Users\mmax2\OneDrive\Documents\GitHub\ProyectoDiseno\PresentacionRutApp\src\main\java\Frames\AsientosDisponibles.java
+/Users/juanpheras/ITSON/ISW/4to Semestre/DiseñoSoftware/trabajoDiseño/ProyectoDiseno/PresentacionRutApp/src/main/java/Clases/Render.java
+/Users/juanpheras/ITSON/ISW/4to Semestre/DiseñoSoftware/trabajoDiseño/ProyectoDiseno/PresentacionRutApp/src/main/java/Clases/Tabla.java
+/Users/juanpheras/ITSON/ISW/4to Semestre/DiseñoSoftware/trabajoDiseño/ProyectoDiseno/PresentacionRutApp/src/main/java/Control/ControlNegocio.java
+/Users/juanpheras/ITSON/ISW/4to Semestre/DiseñoSoftware/trabajoDiseño/ProyectoDiseno/PresentacionRutApp/src/main/java/Control/CordinadorPresentacion.java
+/Users/juanpheras/ITSON/ISW/4to Semestre/DiseñoSoftware/trabajoDiseño/ProyectoDiseno/PresentacionRutApp/src/main/java/Frames/AsientosDisponibles.java
+/Users/juanpheras/ITSON/ISW/4to Semestre/DiseñoSoftware/trabajoDiseño/ProyectoDiseno/PresentacionRutApp/src/main/java/Frames/BuscarViaje.java
+/Users/juanpheras/ITSON/ISW/4to Semestre/DiseñoSoftware/trabajoDiseño/ProyectoDiseno/PresentacionRutApp/src/main/java/Frames/ComprarBoleto.java
+/Users/juanpheras/ITSON/ISW/4to Semestre/DiseñoSoftware/trabajoDiseño/ProyectoDiseno/PresentacionRutApp/src/main/java/Frames/InicioSesion.java
+/Users/juanpheras/ITSON/ISW/4to Semestre/DiseñoSoftware/trabajoDiseño/ProyectoDiseno/PresentacionRutApp/src/main/java/Frames/MainMenu.java
+/Users/juanpheras/ITSON/ISW/4to Semestre/DiseñoSoftware/trabajoDiseño/ProyectoDiseno/PresentacionRutApp/src/main/java/Frames/ResumenCompra.java
+/Users/juanpheras/ITSON/ISW/4to Semestre/DiseñoSoftware/trabajoDiseño/ProyectoDiseno/PresentacionRutApp/src/main/java/Frames/SistemaRutaApp.java
+/Users/juanpheras/ITSON/ISW/4to Semestre/DiseñoSoftware/trabajoDiseño/ProyectoDiseno/PresentacionRutApp/src/main/java/Frames/ViajesDisponibles.java
+/Users/juanpheras/ITSON/ISW/4to Semestre/DiseñoSoftware/trabajoDiseño/ProyectoDiseno/PresentacionRutApp/src/main/java/Frames/asientos.java
+/Users/juanpheras/ITSON/ISW/4to Semestre/DiseñoSoftware/trabajoDiseño/ProyectoDiseno/PresentacionRutApp/src/main/java/Interfaces/ITabla.java

@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  *
- * @author multaslokas33
+ * @author BusSoft®
  */
 public class Control {
 

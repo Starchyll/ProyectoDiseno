@@ -180,13 +180,14 @@ public class BuscarViaje extends javax.swing.JFrame {
         String origenSeleccionado = (String) BoxOrigen.getSelectedItem();
 
         if (origenSeleccionado != null && !origenSeleccionado.isEmpty()) {
-            List<String> destinos = CordinadorPresentacion.getInstancia().buscarDestinosDisponibles(origenSeleccionado);
+            List<String> destinos = ControlNegocio.getInstancia().obtenerDestinosDisponibles(origenSeleccionado);
 
-            BoxDestino.removeAllItems();
-            for (String destino : destinos) {
-                BoxDestino.addItem(destino);
+            if (destinos != null) {
+                BoxDestino.removeAllItems();
+                for (String destino : destinos) {
+                    BoxDestino.addItem(destino);
+                }
             }
-
             BoxDestino.setEnabled(true);
         } else {
             BoxDestino.removeAllItems();
@@ -204,7 +205,7 @@ public class BuscarViaje extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Por favor seleccione una fecha.");
                 return;
             }
-          
+
             java.util.Date fecha = calendar.getTime(); // Obtener la fecha como Date
 
             // Si necesitas convertir la fecha a LocalDate
@@ -213,7 +214,7 @@ public class BuscarViaje extends javax.swing.JFrame {
             String origen = BoxOrigen.getSelectedItem().toString();
             String destino = BoxDestino.getSelectedItem().toString();
 
-            CordinadorPresentacion.getInstancia().mostrarViajesDisponibles(origen, destino, localDate);
+            ControlNegocio.getInstancia().obtenerListaViajes(origen, destino, localDate);
             dispose(); // Cerrar la ventana actual
         }
 
@@ -224,7 +225,6 @@ public class BuscarViaje extends javax.swing.JFrame {
         mainMenu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

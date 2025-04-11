@@ -10,6 +10,7 @@ import Frames.AsientosDisponibles;
 import Frames.BuscarViaje;
 import Frames.MainMenu;
 import Frames.ViajesDisponibles;
+import itson.consultardisponibilidad.Interfaz.IConsultarDisponibilidad;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -18,6 +19,8 @@ import java.util.List;
  * @author chris
  */
 public class CordinadorPresentacion {
+    
+    private IConsultarDisponibilidad consultarDisponibilidad;
 
     private static CordinadorPresentacion instancia;
 

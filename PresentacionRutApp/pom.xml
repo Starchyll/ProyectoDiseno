@@ -27,6 +27,11 @@
             <artifactId>RutAppDTO</artifactId>
             <version>1.0</version>
         </dependency>
+        <dependency>
+            <groupId>itson</groupId>
+            <artifactId>ConsultarDisponibilidad</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

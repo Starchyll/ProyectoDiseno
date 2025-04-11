@@ -8,6 +8,8 @@ import Ex.CompraBoletoException;
 import Fachada.ComprarBoleto;
 import Interfaz.IComprarBoleto;
 import enumm.estadoAsiento;
+import itson.consultardisponibilidad.Interfaz.IConsultarDisponibilidad;
+import itson.consultardisponibilidad.fachada.FachadaConsultarDisponibilidad;
 import itson.rutappdto.AsientoDTO;
 import itson.rutappdto.CamionDTO;
 import itson.rutappdto.ViajeDTO;
@@ -24,6 +26,7 @@ import javax.swing.JOptionPane;
  */
 public class ControlNegocio {
 
+    IConsultarDisponibilidad consultarDisponibilidad = new FachadaConsultarDisponibilidad();
     IComprarBoleto comprarBoleto = new ComprarBoleto();
 
     private static ControlNegocio instancia;
@@ -31,20 +34,7 @@ public class ControlNegocio {
     public ControlNegocio() {
     }
 
-    private List<AsientoDTO> crearListaAsientos() {
-        List<AsientoDTO> listaAsientos = new ArrayList<>();
-        
-        for (long i = 0; i < 24; i++) {
-            String numero = String.valueOf(i);
-            if (i == 5 ||i == 7 ||i == 20){
-                listaAsientos.add(new AsientoDTO(i, estadoAsiento.OCUPADO, numero));
-            } else {
-                listaAsientos.add(new AsientoDTO(i, estadoAsiento.DISPONIBLE, numero));                
-            }
-            
-        }
-        return listaAsientos;
-    }
+    
 
     public static ControlNegocio getInstancia() {
         if (instancia == null) {
@@ -53,32 +43,36 @@ public class ControlNegocio {
         return instancia;
     }
 
+    /**
+     * Método que se comunica con el subsistmea y regresa la lista de destinos.
+     * @param origen De donde se parte.
+     * @return 
+     */
     public List<String> obtenerDestinosDisponibles(String origen) {
-        switch (origen) {
-            case "Ciudad A":
-                return Arrays.asList("Ciudad B", "Ciudad C");
-            case "Ciudad B":
-                return Arrays.asList("Ciudad A");
-            case "Ciudad C":
-                return Arrays.asList("Ciudad A", "Ciudad B");
-            default:
-                return new ArrayList<>();
+        List<String> destinos = consultarDisponibilidad.consultarDestinos(origen);
+        if (destinos.isEmpty()){
+            JOptionPane.showMessageDialog(null, 
+                    "No hay destinos para este parametro", 
+                    "Sin coincidencias", JOptionPane.ERROR_MESSAGE);
+            return null;
         }
+        return destinos;
     }
 
     public List<String> obtenerOrigenesDisponibles() {
-        return Arrays.asList("Ciudad A", "Ciudad B", "Ciudad C");
+        return Arrays.asList("Huatabampo", "Los mochis", "Tucson Az.");
     }
 
     public List<ViajeDTO> obtenerListaViajes(String origen, String Destino, LocalDate fecha) {
-        List<ViajeDTO> viajes = new ArrayList<>();
-        Long contador = 0L;
-        for (int i = 0; i < 8; i++) {
-            contador++;
-            CamionDTO camion = new CamionDTO(contador, (i+1)+"a", crearListaAsientos());
-            viajes.add(new ViajeDTO(300.00, origen, Destino, "3hr 30min", camion, fecha));
+        List<ViajeDTO> viajes = consultarDisponibilidad.consultarViajesDisponibles(origen, Destino, fecha);
+        if(viajes.isEmpty() ){
+            JOptionPane.showMessageDialog(null, 
+                    "No se encontraron viajes para estos parametros", 
+                    "Sin coincidencias", JOptionPane.ERROR_MESSAGE);
+            return null;
+        } else {
+            return viajes;
         }
-        return viajes;
     }
 
     public List<ViajeDTO> obtenerViajesDisponibles(String origen, String Destino, LocalDate fecha) {
