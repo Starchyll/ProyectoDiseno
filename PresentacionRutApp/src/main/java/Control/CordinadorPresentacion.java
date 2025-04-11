@@ -83,13 +83,15 @@ public class CordinadorPresentacion {
             return;
         }
 
+        JOptionPane.showMessageDialog(null, "Tienes 5 minutos para realizar la compra");
         contadorIniciado = true;
         temporizador = new Timer(DURACION_CONTADOR, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 temporizador.stop();
                 contadorIniciado = false;
-
+                
+                
                 JOptionPane.showMessageDialog(null, "El tiempo se ha acabado. Inténtelo de nuevo.");
 
                 if (reiniciarAsientosCallback != null) {

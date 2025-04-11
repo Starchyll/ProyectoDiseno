@@ -24,7 +24,7 @@ import javax.swing.JPanel;
 public class AsientosDisponibles extends javax.swing.JFrame {
 
     CamionDTO camion;
-
+      
     // Definir el Enum para los estados de los asientos
     public enum EstadoAsiento {
         LIBRE, SELECCIONADO, OCUPADO
@@ -33,7 +33,6 @@ public class AsientosDisponibles extends javax.swing.JFrame {
     // Crear un HashMap que relacione cada panel con su estado
     private Map<JPanel, EstadoAsiento> mapaEstadosAsientos = new HashMap<>();
     private Map<JPanel, String> mapaNombresPasajeros = new HashMap<>();
-    private CordinadorPresentacion coordinador;
 
     /**
      * Creates new form ComprarViaje
@@ -1014,7 +1013,8 @@ public class AsientosDisponibles extends javax.swing.JFrame {
                     mapaNombresPasajeros.put(panel, nombrePasajero.trim());// Guardar el nombre
                     actualizarResumenAsientos();
                 }
-                coordinador.iniciarTemporizador(() -> reiniciarAsientosSeleccionados());
+                
+                CordinadorPresentacion.getInstancia().iniciarTemporizador(() -> reiniciarAsientosSeleccionados());
                 break;
 
             case SELECCIONADO:
