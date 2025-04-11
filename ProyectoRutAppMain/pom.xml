@@ -8,7 +8,6 @@
     <modules>
         <module>../PresentacionRutApp</module>
         <module>../RutAppDTO</module>
-        <module>../../../NetBeansProjects/ComprarBoleto</module>
         <module>../ComprarBoleto</module>
         <module>../SeleccionAsiento</module>
         <module>../ConsultarDisponibilidad</module>

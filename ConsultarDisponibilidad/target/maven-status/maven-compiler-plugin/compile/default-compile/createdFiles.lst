@@ -1,3 +1,3 @@
-itson/consultardisponibilidad/fachada/FachadaConsultarDisponibilidad.class
-itson/consultardisponibilidad/Interfaz/IConsultarDisponibilidad.class
-itson/consultardisponibilidad/control/ControlConsultarDisponibilidad.class
+itson\consultardisponibilidad\Interfaz\IConsultarDisponibilidad.class
+itson\consultardisponibilidad\control\ControlConsultarDisponibilidad.class
+itson\consultardisponibilidad\fachada\FachadaConsultarDisponibilidad.class

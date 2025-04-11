@@ -7,6 +7,8 @@ package Control;
 import Ex.CompraBoletoException;
 import Fachada.ComprarBoleto;
 import Interfaz.IComprarBoleto;
+import control.ControlSeleccionAsiento;
+import excepciones.SeleccionAsientoException;
 import itson.consultardisponibilidad.Interfaz.IConsultarDisponibilidad;
 import itson.consultardisponibilidad.fachada.FachadaConsultarDisponibilidad;
 import itson.rutappdto.AsientoDTO;
@@ -109,9 +111,6 @@ public class ControlNegocio {
 
     }
 
-//    public void obtenerDestinosDisponibles() {
-//
-//    }
     public void obtenerMetodoPago() {
 
     }
@@ -128,8 +127,11 @@ public class ControlNegocio {
 
     }
 
-    public void apartarAsiento() {
-
+    public void apartarAsiento(AsientoDTO asiento) throws SeleccionAsientoException {
+        if(asiento == null){
+            throw new SeleccionAsientoException("Error de asiento");
+        }
+        ControlSeleccionAsiento.getInstancia().apartarAsiento(asiento);
     }
 
     public void iniciarContador() {

@@ -1,5 +1,7 @@
 package Frames;
 
+import enumm.estadoAsiento;
+import itson.rutappdto.AsientoDTO;
 import itson.rutappdto.CamionDTO;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
@@ -21,6 +23,7 @@ import javax.swing.JPanel;
 public class AsientosDisponibles extends javax.swing.JFrame {
 
     CamionDTO camion;
+
     // Definir el Enum para los estados de los asientos
     public enum EstadoAsiento {
         LIBRE, SELECCIONADO, OCUPADO
@@ -28,9 +31,9 @@ public class AsientosDisponibles extends javax.swing.JFrame {
 
     // Crear un HashMap que relacione cada panel con su estado
     private Map<JPanel, EstadoAsiento> mapaEstadosAsientos = new HashMap<>();
-
     /**
      * Creates new form ComprarViaje
+     * @param camion
      */
     public AsientosDisponibles(CamionDTO camion) {
         initComponents();
@@ -53,10 +56,45 @@ public class AsientosDisponibles extends javax.swing.JFrame {
                 }
             });
         }
-        // Marcar los asientos ocupados al iniciar
-        marcarAsientosOcupados(botonAsientoUno, botonAsientoCinco, botonAsientoDiescisiete); // <--- Agrega más si quieres
 
+        inicializarMapaAsientos();
+        marcarAsientosOcupados(camion.getListaAsiento());
         mapaEstadosAsientos.put(botonAsientoUno, EstadoAsiento.OCUPADO);
+    }
+
+    // Mapear los números de asiento a los paneles correspondientes
+    private Map<String, JPanel> mapaAsientos = new HashMap<>();
+
+    public void cargarCamion(CamionDTO camionDTO) {
+        marcarAsientosOcupados(camionDTO.getListaAsiento());
+    }
+
+
+// Inicializar el HashMap de asientos con sus números y paneles
+    private void inicializarMapaAsientos() {
+        mapaAsientos.put("9", botonAsientoNueve);
+        mapaAsientos.put("10", botonAsientoDiez);
+        mapaAsientos.put("16", botonAsientoDiesciseis);
+        mapaAsientos.put("15", botonAsientoQuince);
+        mapaAsientos.put("14", botonAsientoCatorce);
+        mapaAsientos.put("13", botonAsientoTrece);
+        mapaAsientos.put("19", botonAsientoDiescinueve);
+        mapaAsientos.put("20", botonAsientoVeinte);
+        mapaAsientos.put("18", botonAsientoDiesciocho);
+        mapaAsientos.put("17", botonAsientoDiescisiete);
+        mapaAsientos.put("2", botonAsiento2);
+        mapaAsientos.put("23", botonAsientoVeintitres);
+        mapaAsientos.put("24", botonAsientoVeinticuatro);
+        mapaAsientos.put("21", botonAsientoVeintiuno);
+        mapaAsientos.put("22", botonAsientoVeintidos);
+        mapaAsientos.put("3", botonAsiento3);
+        mapaAsientos.put("8", botonAsientoOcho);
+        mapaAsientos.put("7", botonAsientoSiete);
+        mapaAsientos.put("5", botonAsientoCinco);
+        mapaAsientos.put("6", botonAsientoSeis);
+        mapaAsientos.put("12", botonAsientoDoce);
+        mapaAsientos.put("11", botonAsientoOnce);
+        mapaAsientos.put("1", botonAsientoUno);
     }
 
     // Devuelve una lista de los paneles que están ocupados
@@ -72,12 +110,17 @@ public class AsientosDisponibles extends javax.swing.JFrame {
         return ocupados;
     }
 
-    // Método para marcar asientos ocupados
-    private void marcarAsientosOcupados(JPanel... ocupados) {
-        for (JPanel panel : ocupados) {
-            mapaEstadosAsientos.put(panel, EstadoAsiento.OCUPADO);
-            panel.setBackground(new Color(153, 0, 0)); // Rojo oscuro
-            //JUANPIIIIII
+    // Método para marcar los asientos ocupados
+    private void marcarAsientosOcupados(List<AsientoDTO> listaAsientos) {
+        for (AsientoDTO asiento : listaAsientos) {
+            // Verificamos si el estado es "OCUPADO"
+            if (asiento.getEstado() == estadoAsiento.OCUPADO) {
+                String numeroAsiento = asiento.getNumero();  // Número de asiento (String)
+                JPanel panelAsiento = mapaAsientos.get(numeroAsiento);  // Obtener el panel correspondiente al número
+                if (panelAsiento != null) {
+                    panelAsiento.setBackground(Color.RED);  // Pintamos el panel de rojo si está ocupado
+                }
+            }
         }
     }
 
