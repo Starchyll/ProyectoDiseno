@@ -7,7 +7,6 @@ package Control;
 import Ex.CompraBoletoException;
 import Fachada.ComprarBoleto;
 import Interfaz.IComprarBoleto;
-import enumm.estadoAsiento;
 import itson.consultardisponibilidad.Interfaz.IConsultarDisponibilidad;
 import itson.consultardisponibilidad.fachada.FachadaConsultarDisponibilidad;
 import itson.rutappdto.AsientoDTO;
