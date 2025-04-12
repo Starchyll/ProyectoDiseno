@@ -2,11 +2,15 @@ package Frames;
 
 import Control.CordinadorPresentacion;
 import enumm.estadoAsiento;
+import itson.rutappdto.AsientoBoletoDTO;
 import itson.rutappdto.AsientoDTO;
+import itson.rutappdto.BoletoDTO;
 import itson.rutappdto.CamionDTO;
+import itson.rutappdto.UsuarioDTO;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,10 +28,79 @@ import javax.swing.JPanel;
 public class AsientosDisponibles extends javax.swing.JFrame {
 
     CamionDTO camion;
-      
+    
+    UsuarioDTO usuario = new UsuarioDTO("Juan Pérez");
+
+        List<AsientoDTO> asientosCamion = new ArrayList<>();
+        asientosCamion.add(new AsientoDTO(1L, estadoAsiento.DISPONIBLE, "A1"));
+        asientosCamion.add(new AsientoDTO(2L, estadoAsiento.OCUPADO, "A2"));
+
+
+        List<AsientoBoletoDTO> asientosBoleto = new ArrayList<>();
+
+        AsientoDTO asiento2 = new AsientoDTO(2L, estadoAsiento.OCUPADO, "A2");
+
+        asientosBoleto.add(new AsientoBoletoDTO(asiento1, null, "A1", 100.0)); // Reemplaza `null` con la instancia de BoletoDTO cuando la tengas
+        asientosBoleto.add(new AsientoBoletoDTO(asiento2, null, "A2", 100.0)); // Reemplaza `null` con la instancia de BoletoDTO cuando la tengas
+
+        BoletoDTO boleto = new BoletoDTO(
+                "Ciudad A",    // origen
+                "Ciudad B",    // destino
+                "15:30",       // hrSalida
+                usuario,       // usuario
+                200.0,         // precio
+                "2 horas",     // duracion
+                camion,        // camion
+                asientosBoleto // listaAsiento
+        );
+
     // Definir el Enum para los estados de los asientos
     public enum EstadoAsiento {
         LIBRE, SELECCIONADO, OCUPADO
+    }
+
+    class AsientoAsignado {
+
+        private String numeroAsiento;
+        private String nombrePasajero;
+
+        public AsientoAsignado(String numeroAsiento, String nombrePasajero) {
+            this.numeroAsiento = numeroAsiento;
+            this.nombrePasajero = nombrePasajero;
+        }
+
+        public String getNumeroAsiento() {
+            return numeroAsiento;
+        }
+
+        public String getNombrePasajero() {
+            return nombrePasajero;
+        }
+
+        @Override
+        public String toString() {
+            return "Asiento " + numeroAsiento + ": " + nombrePasajero;
+        }
+    }
+
+    public List<AsientoAsignado> obtenerAsientosYPasajeros() {
+        List<AsientoAsignado> lista = new ArrayList<>();
+
+        for (Map.Entry<JPanel, String> entry : mapaNombresPasajeros.entrySet()) {
+            String nombre = entry.getValue();
+            JPanel panel = entry.getKey();
+
+            // Buscar número de asiento correspondiente al panel
+            String numeroAsiento = mapaAsientos.entrySet().stream()
+                    .filter(e -> e.getValue().equals(panel))
+                    .map(Map.Entry::getKey)
+                    .findFirst()
+                    .orElse("Desconocido");
+
+            lista.add(new AsientoAsignado(numeroAsiento, nombre));
+        }
+
+        return lista;
     }
 
     // Crear un HashMap que relacione cada panel con su estado
@@ -64,6 +137,10 @@ public class AsientosDisponibles extends javax.swing.JFrame {
         inicializarMapaAsientos();
         marcarAsientosOcupados(camion.getListaAsiento());
         mapaEstadosAsientos.put(botonAsientoUno, EstadoAsiento.OCUPADO);
+    }
+
+    public void compararAsiento() {
+
     }
 
     // Mapear los números de asiento a los paneles correspondientes
@@ -192,6 +269,7 @@ public class AsientosDisponibles extends javax.swing.JFrame {
         numeroAsiento21 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         resumenTextArea = new javax.swing.JTextArea();
+        btnCompraViaje = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -203,6 +281,7 @@ public class AsientosDisponibles extends javax.swing.JFrame {
         Header.setPreferredSize(new java.awt.Dimension(520, 60));
 
         jLabel1.setFont(new java.awt.Font("Roboto Condensed Medium", 1, 48)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("RUTAPP");
 
         javax.swing.GroupLayout HeaderLayout = new javax.swing.GroupLayout(Header);
@@ -237,7 +316,7 @@ public class AsientosDisponibles extends javax.swing.JFrame {
             .addGap(0, 60, Short.MAX_VALUE)
         );
 
-        BackGround.add(Footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 530, 500, 60));
+        BackGround.add(Footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 540, 500, 60));
 
         contenedorAsientos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -908,7 +987,18 @@ public class AsientosDisponibles extends javax.swing.JFrame {
         resumenTextArea.setWrapStyleWord(true);
         jScrollPane2.setViewportView(resumenTextArea);
 
-        BackGround.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, 360, 130));
+        BackGround.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, 360, 130));
+
+        btnCompraViaje.setBackground(new java.awt.Color(47, 40, 34));
+        btnCompraViaje.setFont(new java.awt.Font("Roboto Condensed Black", 1, 13)); // NOI18N
+        btnCompraViaje.setForeground(new java.awt.Color(255, 255, 255));
+        btnCompraViaje.setText("COMPRAR");
+        btnCompraViaje.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCompraViajeActionPerformed(evt);
+            }
+        });
+        BackGround.add(btnCompraViaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 480, 110, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -918,9 +1008,7 @@ public class AsientosDisponibles extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(BackGround, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(BackGround, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -929,6 +1017,14 @@ public class AsientosDisponibles extends javax.swing.JFrame {
     private void botonAsientoCincoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAsientoCincoMouseClicked
         seleccionarAsiento(botonAsientoCinco);
     }//GEN-LAST:event_botonAsientoCincoMouseClicked
+
+    private void btnCompraViajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompraViajeActionPerformed
+        List<AsientoAsignado> lista = obtenerAsientosYPasajeros();
+        ResumenCompra resumen = new ResumenCompra();
+        resumen.mostrarResumen(lista, , 150.00); // <- el último valor es el monedero, cámbialo si lo sacas de otro lado
+        resumen.setVisible(true);
+
+    }//GEN-LAST:event_btnCompraViajeActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -959,6 +1055,7 @@ public class AsientosDisponibles extends javax.swing.JFrame {
     private javax.swing.JPanel botonAsientoVeintidos;
     private javax.swing.JPanel botonAsientoVeintitres;
     private javax.swing.JPanel botonAsientoVeintiuno;
+    private javax.swing.JButton btnCompraViaje;
     private javax.swing.JPanel contenedorAsientos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -1013,7 +1110,7 @@ public class AsientosDisponibles extends javax.swing.JFrame {
                     mapaNombresPasajeros.put(panel, nombrePasajero.trim());// Guardar el nombre
                     actualizarResumenAsientos();
                 }
-                
+
                 CordinadorPresentacion.getInstancia().iniciarTemporizador(() -> reiniciarAsientosSeleccionados());
                 break;
 
@@ -1058,4 +1155,5 @@ public class AsientosDisponibles extends javax.swing.JFrame {
 
         resumenTextArea.setText(resumen.toString());
     }
+
 }

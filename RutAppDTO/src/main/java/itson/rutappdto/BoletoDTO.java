@@ -9,34 +9,27 @@ import java.util.List;
  * @author pedro
  */
 public class BoletoDTO {
-    private Long idBoleto;
     private String origen;
     private String destino;
     private String hrSalida;
-    private Long idUsuario;
+    private UsuarioDTO usuario;
     private Double precio;
     private String duracion;
-    private Long idCamion;
-    private List<AsientoDTO> listaAsiento;
+    private CamionDTO camion;
+    private List<AsientoBoletoDTO> listaAsiento;
 
-    public BoletoDTO(Long idBoleto, String origen, String destino, String hrSalida, Long idUsuario, Double precio, String duracion, Long idCamion, List<AsientoDTO> listaAsiento) {
-        this.idBoleto = idBoleto;
+    public BoletoDTO() {
+    }
+
+    public BoletoDTO(String origen, String destino, String hrSalida, UsuarioDTO usuario, Double precio, String duracion, CamionDTO camion, List<AsientoBoletoDTO> listaAsiento) {
         this.origen = origen;
         this.destino = destino;
         this.hrSalida = hrSalida;
-        this.idUsuario = idUsuario;
+        this.usuario = usuario;
         this.precio = precio;
         this.duracion = duracion;
-        this.idCamion = idCamion;
+        this.camion = camion;
         this.listaAsiento = listaAsiento;
-    }
-
-    public Long getIdBoleto() {
-        return idBoleto;
-    }
-
-    public void setIdBoleto(Long idBoleto) {
-        this.idBoleto = idBoleto;
     }
 
     public String getOrigen() {
@@ -63,12 +56,12 @@ public class BoletoDTO {
         this.hrSalida = hrSalida;
     }
 
-    public Long getIdUsuario() {
-        return idUsuario;
+    public UsuarioDTO getUsuario() {
+        return usuario;
     }
 
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setUsuario(UsuarioDTO usuario) {
+        this.usuario = usuario;
     }
 
     public Double getPrecio() {
@@ -87,22 +80,23 @@ public class BoletoDTO {
         this.duracion = duracion;
     }
 
-    public Long getIdCamion() {
-        return idCamion;
+    public CamionDTO getCamion() {
+        return camion;
     }
 
-    public void setIdCamion(Long idCamion) {
-        this.idCamion = idCamion;
+    public void setCamion(CamionDTO camion) {
+        this.camion = camion;
     }
 
-    public List<AsientoDTO> getListaAsiento() {
+    public List<AsientoBoletoDTO> getListaAsiento() {
         return listaAsiento;
     }
 
-    public void setListaAsiento(List<AsientoDTO> listaAsiento) {
+    public void setListaAsiento(List<AsientoBoletoDTO> listaAsiento) {
         this.listaAsiento = listaAsiento;
     }
 
+    
     
     
 }

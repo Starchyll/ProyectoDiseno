@@ -4,9 +4,19 @@
  */
 package Frames;
 
+import enumm.estadoAsiento;
+import itson.rutappdto.AsientoBoletoDTO;
+import itson.rutappdto.AsientoDTO;
 import itson.rutappdto.BoletoDTO;
+import itson.rutappdto.CamionDTO;
 import itson.rutappdto.DetallesPagoDTO;
+import itson.rutappdto.UsuarioDTO;
+import java.awt.BorderLayout;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -14,12 +24,28 @@ import java.util.List;
  */
 public class ResumenCompra extends javax.swing.JFrame {
 
+    private final JTextArea resumenTextArea;
+
+    private List<AsientosDisponibles.AsientoAsignado> asientosAsignados;
+
+     
+
+   
+
     /**
      * Creates new form ComprarViaje
      */
     public ResumenCompra() {
-        initComponents();
-        
+
+        setTitle("Resumen de Compra");
+        setSize(400, 300);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
+
+        resumenTextArea = new JTextArea();
+        resumenTextArea.setEditable(false);
+        add(new JScrollPane(resumenTextArea), BorderLayout.CENTER);;
+
     }
 
     /**
@@ -42,9 +68,9 @@ public class ResumenCompra extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         lblOrigen = new javax.swing.JLabel();
         lblDestino = new javax.swing.JLabel();
-        lblNumAsientos = new javax.swing.JLabel();
+        lblAsientos = new javax.swing.JLabel();
         lblDuracion = new javax.swing.JLabel();
-        lblNombre = new javax.swing.JLabel();
+        lblNombres = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
@@ -54,11 +80,11 @@ public class ResumenCompra extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        lblPrecio1 = new javax.swing.JLabel();
+        lblPrecio = new javax.swing.JLabel();
         lblTotal = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        lblMonedero1 = new javax.swing.JLabel();
+        lblMonedero = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -139,7 +165,7 @@ public class ResumenCompra extends javax.swing.JFrame {
                 lblOrigenInputMethodTextChanged(evt);
             }
         });
-        BackGround.add(lblOrigen, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 150, 70, -1));
+        BackGround.add(lblOrigen, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 150, 70, 20));
 
         lblDestino.setBackground(new java.awt.Color(255, 255, 255));
         lblDestino.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
@@ -147,11 +173,11 @@ public class ResumenCompra extends javax.swing.JFrame {
         lblDestino.setText("Destino");
         BackGround.add(lblDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, 160, -1));
 
-        lblNumAsientos.setBackground(new java.awt.Color(255, 255, 255));
-        lblNumAsientos.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
-        lblNumAsientos.setForeground(new java.awt.Color(0, 0, 0));
-        lblNumAsientos.setText("Asiento(s)");
-        BackGround.add(lblNumAsientos, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 230, 160, -1));
+        lblAsientos.setBackground(new java.awt.Color(255, 255, 255));
+        lblAsientos.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
+        lblAsientos.setForeground(new java.awt.Color(0, 0, 0));
+        lblAsientos.setText("Asiento(s)");
+        BackGround.add(lblAsientos, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 230, 160, -1));
 
         lblDuracion.setBackground(new java.awt.Color(255, 255, 255));
         lblDuracion.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
@@ -159,11 +185,11 @@ public class ResumenCompra extends javax.swing.JFrame {
         lblDuracion.setText("00:00");
         BackGround.add(lblDuracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 270, 160, -1));
 
-        lblNombre.setBackground(new java.awt.Color(255, 255, 255));
-        lblNombre.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
-        lblNombre.setForeground(new java.awt.Color(0, 0, 0));
-        lblNombre.setText("Nombre(s)");
-        BackGround.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 310, 160, -1));
+        lblNombres.setBackground(new java.awt.Color(255, 255, 255));
+        lblNombres.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
+        lblNombres.setForeground(new java.awt.Color(0, 0, 0));
+        lblNombres.setText("Nombre(s)");
+        BackGround.add(lblNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 310, 160, -1));
 
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
         jLabel9.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
@@ -199,11 +225,11 @@ public class ResumenCompra extends javax.swing.JFrame {
         jLabel13.setText("Asiento(s)");
         BackGround.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 160, -1));
 
-        lblPrecio1.setBackground(new java.awt.Color(255, 255, 255));
-        lblPrecio1.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
-        lblPrecio1.setForeground(new java.awt.Color(0, 0, 0));
-        lblPrecio1.setText("$....");
-        BackGround.add(lblPrecio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 360, 160, -1));
+        lblPrecio.setBackground(new java.awt.Color(255, 255, 255));
+        lblPrecio.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
+        lblPrecio.setForeground(new java.awt.Color(0, 0, 0));
+        lblPrecio.setText("$....");
+        BackGround.add(lblPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 360, 160, -1));
 
         lblTotal.setBackground(new java.awt.Color(255, 255, 255));
         lblTotal.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
@@ -223,11 +249,11 @@ public class ResumenCompra extends javax.swing.JFrame {
         jLabel16.setText("Nombre(s)");
         BackGround.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 160, -1));
 
-        lblMonedero1.setBackground(new java.awt.Color(255, 255, 255));
-        lblMonedero1.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
-        lblMonedero1.setForeground(new java.awt.Color(0, 0, 0));
-        lblMonedero1.setText("$....");
-        BackGround.add(lblMonedero1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 400, 160, -1));
+        lblMonedero.setBackground(new java.awt.Color(255, 255, 255));
+        lblMonedero.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
+        lblMonedero.setForeground(new java.awt.Color(0, 0, 0));
+        lblMonedero.setText("$....");
+        BackGround.add(lblMonedero, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 400, 160, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -251,8 +277,8 @@ public class ResumenCompra extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_BackGroundInputMethodTextChanged
 
-    private void datosResumen (List<BoletoDTO> boleto){
-        
+    private void datosResumen(BoletoDTO boleto) {
+
     }
 
     /**
@@ -318,13 +344,41 @@ public class ResumenCompra extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JLabel lblAsientos;
     private javax.swing.JLabel lblDestino;
     private javax.swing.JLabel lblDuracion;
-    private javax.swing.JLabel lblMonedero1;
-    private javax.swing.JLabel lblNombre;
-    private javax.swing.JLabel lblNumAsientos;
+    private javax.swing.JLabel lblMonedero;
+    private javax.swing.JLabel lblNombres;
     private javax.swing.JLabel lblOrigen;
-    private javax.swing.JLabel lblPrecio1;
+    private javax.swing.JLabel lblPrecio;
     private javax.swing.JLabel lblTotal;
     // End of variables declaration//GEN-END:variables
+    public void mostrarResumen(List<AsientosDisponibles.AsientoAsignado> lista, BoletoDTO camion, double monedero) {
+        // Origen y destino
+        lblOrigen.setText(camion.getOrigen());
+        lblDestino.setText(camion.getDestino());
+
+        // Duración (puedes ajustarlo según tus datos)
+        lblDuracion.setText(camion.getDuracion());
+
+        // Asientos y nombres
+        StringBuilder asientos = new StringBuilder();
+        StringBuilder nombres = new StringBuilder();
+
+        for (AsientosDisponibles.AsientoAsignado asignado : lista) {
+            asientos.append(asignado.getNumeroAsiento()).append(" ");
+            nombres.append(asignado.getNombrePasajero()).append(" / ");
+        }
+
+        lblAsientos.setText(asientos.toString().trim());
+        lblNombres.setText(nombres.toString().trim());
+
+        // Precio por asiento
+        double precio = camion.getPrecio();
+        double total = precio * lista.size();
+
+        lblPrecio.setText("$" + precio);
+        lblMonedero.setText("$" + monedero);
+        lblTotal.setText("$" + total);
+    }
 }
