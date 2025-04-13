@@ -8,7 +8,9 @@ import itson.rutappdto.CamionDTO;
 import itson.rutappdto.ViajeDTO;
 import Frames.AsientosDisponibles;
 import Frames.BuscarViaje;
+import Frames.ComprarBoleto;
 import Frames.MainMenu;
+import Frames.ResumenCompra;
 import Frames.ViajesDisponibles;
 import itson.consultardisponibilidad.Interfaz.IConsultarDisponibilidad;
 import java.awt.event.ActionEvent;
@@ -90,8 +92,7 @@ public class CordinadorPresentacion {
             public void actionPerformed(ActionEvent e) {
                 temporizador.stop();
                 contadorIniciado = false;
-                
-                
+
                 JOptionPane.showMessageDialog(null, "El tiempo se ha acabado. Inténtelo de nuevo.");
 
                 if (reiniciarAsientosCallback != null) {
@@ -101,5 +102,15 @@ public class CordinadorPresentacion {
         });
         temporizador.setRepeats(false);
         temporizador.start();
+    }
+
+    public void abrirResumenCompra() {
+        ResumenCompra forma = new ResumenCompra();
+        forma.setVisible(true);
+    }
+
+    public void abrirMetodoPago() {
+        ComprarBoleto forma = new ComprarBoleto();
+        forma.setVisible(true);
     }
 }

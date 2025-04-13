@@ -4,6 +4,8 @@
  */
 package Frames;
 
+import Control.CordinadorPresentacion;
+
 /**
  *
  * @author mmax2
@@ -212,7 +214,46 @@ public class ComprarBoleto extends javax.swing.JFrame {
     }//GEN-LAST:event_botonPagarMonederoActionPerformed
 
     private void btnCompraViajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompraViajeActionPerformed
-       
+        if (botonPagarTarjeta.isSelected()) {
+            String numeroTarjeta = campoNumeroTarjeta.getText().trim();
+            String nombreTitular = campoNombreTitular.getText().trim();
+            String vencimiento = campoNombreTitular1.getText().trim(); // debería tener un nombre más descriptivo, como campoVencimiento
+            String cvv = campoNombreTitular2.getText().trim(); // debería ser campoCVV
+
+            if (numeroTarjeta.isEmpty() || nombreTitular.isEmpty() || vencimiento.isEmpty() || cvv.isEmpty()) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Por favor, completa todos los campos de la tarjeta.", "Campos vacíos", javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            if (!numeroTarjeta.matches("\\d{16}")) {
+                javax.swing.JOptionPane.showMessageDialog(this, "El número de tarjeta debe tener 16 dígitos numéricos.", "Número de tarjeta inválido", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (!cvv.matches("\\d{3}")) {
+                javax.swing.JOptionPane.showMessageDialog(this, "El CVV debe tener 3 dígitos numéricos.", "CVV inválido", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (!vencimiento.matches("(0[1-9]|1[0-2])/\\d{2}")) {
+                javax.swing.JOptionPane.showMessageDialog(this, "El vencimiento debe estar en formato MM/AA (por ejemplo, 08/26).", "Fecha de vencimiento inválida", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Si pasa todas las validaciones:
+            javax.swing.JOptionPane.showMessageDialog(this, "¡Pago con tarjeta procesado con éxito!");
+            // Aquí puedes continuar con la lógica de compra.
+
+        } else if (botonPagarMonedero.isSelected()) {
+            // Lógica para pagar con monedero
+            javax.swing.JOptionPane.showMessageDialog(this, "¡Pago con monedero procesado con éxito!");
+            
+           CordinadorPresentacion.getInstancia().abrirResumenCompra();
+           this.dispose();
+
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Por favor, selecciona un método de pago.", "Método de pago no seleccionado", javax.swing.JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnCompraViajeActionPerformed
 
     private void campoNumeroTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNumeroTarjetaActionPerformed

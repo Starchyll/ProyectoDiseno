@@ -28,30 +28,37 @@ import javax.swing.JPanel;
 public class AsientosDisponibles extends javax.swing.JFrame {
 
     CamionDTO camion;
-    
+
     UsuarioDTO usuario = new UsuarioDTO("Juan Pérez");
 
-        List<AsientoDTO> asientosCamion = new ArrayList<>();
-        asientosCamion.add(new AsientoDTO(1L, estadoAsiento.DISPONIBLE, "A1"));
-        asientosCamion.add(new AsientoDTO(2L, estadoAsiento.OCUPADO, "A2"));
+    List<AsientoDTO> asientosCamion = new ArrayList<>();
+    List<AsientoBoletoDTO> asientosBoleto = new ArrayList<>();
 
-
-        List<AsientoBoletoDTO> asientosBoleto = new ArrayList<>();
-
+    public AsientosDisponibles() {
+        // Crear asientos
+        AsientoDTO asiento1 = new AsientoDTO(1L, estadoAsiento.DISPONIBLE, "A1");
         AsientoDTO asiento2 = new AsientoDTO(2L, estadoAsiento.OCUPADO, "A2");
 
-        asientosBoleto.add(new AsientoBoletoDTO(asiento1, null, "A1", 100.0)); // Reemplaza `null` con la instancia de BoletoDTO cuando la tengas
-        asientosBoleto.add(new AsientoBoletoDTO(asiento2, null, "A2", 100.0)); // Reemplaza `null` con la instancia de BoletoDTO cuando la tengas
+        // Agregar a la lista de asientos del camión
+        asientosCamion.add(asiento1);
+        asientosCamion.add(asiento2);
 
-        BoletoDTO boleto = new BoletoDTO(
-                "Ciudad A",    // origen
-                "Ciudad B",    // destino
-                "15:30",       // hrSalida
-                usuario,       // usuario
-                200.0,         // precio
-                "2 horas",     // duracion
-                camion,        // camion
-                asientosBoleto // listaAsiento
+        // Agregar a la lista de asientos del boleto
+        asientosBoleto.add(new AsientoBoletoDTO(asiento1, null, "A1", 100.0));
+        asientosBoleto.add(new AsientoBoletoDTO(asiento2, null, "A2", 100.0));
+
+        // Crear y guardar el boleto
+
+    }
+      BoletoDTO boleto = new BoletoDTO(
+                "Ciudad A",
+                "Ciudad B",
+                "15:30",
+                usuario,
+                200.0,
+                "2 horas",
+                camion,
+                asientosBoleto
         );
 
     // Definir el Enum para los estados de los asientos
@@ -1021,72 +1028,12 @@ public class AsientosDisponibles extends javax.swing.JFrame {
     private void btnCompraViajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompraViajeActionPerformed
         List<AsientoAsignado> lista = obtenerAsientosYPasajeros();
         ResumenCompra resumen = new ResumenCompra();
-        resumen.mostrarResumen(lista, , 150.00); // <- el último valor es el monedero, cámbialo si lo sacas de otro lado
+        resumen.mostrarResumen(lista,boleto, 150.00); // <- el último valor es el monedero, cámbialo si lo sacas de otro lado
         resumen.setVisible(true);
+        
+        //CordinadorPresentacion.getInstancia().abrirMetodoPago();
 
     }//GEN-LAST:event_btnCompraViajeActionPerformed
-
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel BackGround;
-    private javax.swing.JPanel Footer;
-    private javax.swing.JPanel Header;
-    private javax.swing.JPanel botonAsiento2;
-    private javax.swing.JPanel botonAsiento3;
-    private javax.swing.JPanel botonAsientoCatorce;
-    private javax.swing.JPanel botonAsientoCinco;
-    private javax.swing.JPanel botonAsientoDiescinueve;
-    private javax.swing.JPanel botonAsientoDiesciocho;
-    private javax.swing.JPanel botonAsientoDiesciseis;
-    private javax.swing.JPanel botonAsientoDiescisiete;
-    private javax.swing.JPanel botonAsientoDiez;
-    private javax.swing.JPanel botonAsientoDoce;
-    private javax.swing.JPanel botonAsientoNueve;
-    private javax.swing.JPanel botonAsientoOcho;
-    private javax.swing.JPanel botonAsientoOnce;
-    private javax.swing.JPanel botonAsientoQuince;
-    private javax.swing.JPanel botonAsientoSeis;
-    private javax.swing.JPanel botonAsientoSiete;
-    private javax.swing.JPanel botonAsientoTrece;
-    private javax.swing.JPanel botonAsientoUno;
-    private javax.swing.JPanel botonAsientoUno1;
-    private javax.swing.JPanel botonAsientoVeinte;
-    private javax.swing.JPanel botonAsientoVeinticuatro;
-    private javax.swing.JPanel botonAsientoVeintidos;
-    private javax.swing.JPanel botonAsientoVeintitres;
-    private javax.swing.JPanel botonAsientoVeintiuno;
-    private javax.swing.JButton btnCompraViaje;
-    private javax.swing.JPanel contenedorAsientos;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel numeroAsiento10;
-    private javax.swing.JLabel numeroAsiento11;
-    private javax.swing.JLabel numeroAsiento12;
-    private javax.swing.JLabel numeroAsiento13;
-    private javax.swing.JLabel numeroAsiento14;
-    private javax.swing.JLabel numeroAsiento15;
-    private javax.swing.JLabel numeroAsiento16;
-    private javax.swing.JLabel numeroAsiento17;
-    private javax.swing.JLabel numeroAsiento18;
-    private javax.swing.JLabel numeroAsiento19;
-    private javax.swing.JLabel numeroAsiento20;
-    private javax.swing.JLabel numeroAsiento21;
-    private javax.swing.JLabel numeroAsiento22;
-    private javax.swing.JLabel numeroAsiento23;
-    private javax.swing.JLabel numeroAsiento5;
-    private javax.swing.JLabel numeroAsiento6;
-    private javax.swing.JLabel numeroAsiento7;
-    private javax.swing.JLabel numeroAsiento8;
-    private javax.swing.JLabel numeroAsiento9;
-    private javax.swing.JLabel numeroAsientoCuatro;
-    private javax.swing.JLabel numeroAsientoDos;
-    private javax.swing.JLabel numeroAsientoSeis;
-    private javax.swing.JLabel numeroAsientoTres;
-    private javax.swing.JLabel numeroAsientoUno;
-    private javax.swing.JTextArea resumenTextArea;
-    // End of variables declaration//GEN-END:variables
-
     private void seleccionarAsiento(JPanel panel) {
 
         // Obtener el estado actual del asiento desde el HashMap
@@ -1155,5 +1102,65 @@ public class AsientosDisponibles extends javax.swing.JFrame {
 
         resumenTextArea.setText(resumen.toString());
     }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel BackGround;
+    private javax.swing.JPanel Footer;
+    private javax.swing.JPanel Header;
+    private javax.swing.JPanel botonAsiento2;
+    private javax.swing.JPanel botonAsiento3;
+    private javax.swing.JPanel botonAsientoCatorce;
+    private javax.swing.JPanel botonAsientoCinco;
+    private javax.swing.JPanel botonAsientoDiescinueve;
+    private javax.swing.JPanel botonAsientoDiesciocho;
+    private javax.swing.JPanel botonAsientoDiesciseis;
+    private javax.swing.JPanel botonAsientoDiescisiete;
+    private javax.swing.JPanel botonAsientoDiez;
+    private javax.swing.JPanel botonAsientoDoce;
+    private javax.swing.JPanel botonAsientoNueve;
+    private javax.swing.JPanel botonAsientoOcho;
+    private javax.swing.JPanel botonAsientoOnce;
+    private javax.swing.JPanel botonAsientoQuince;
+    private javax.swing.JPanel botonAsientoSeis;
+    private javax.swing.JPanel botonAsientoSiete;
+    private javax.swing.JPanel botonAsientoTrece;
+    private javax.swing.JPanel botonAsientoUno;
+    private javax.swing.JPanel botonAsientoUno1;
+    private javax.swing.JPanel botonAsientoVeinte;
+    private javax.swing.JPanel botonAsientoVeinticuatro;
+    private javax.swing.JPanel botonAsientoVeintidos;
+    private javax.swing.JPanel botonAsientoVeintitres;
+    private javax.swing.JPanel botonAsientoVeintiuno;
+    private javax.swing.JButton btnCompraViaje;
+    private javax.swing.JPanel contenedorAsientos;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel numeroAsiento10;
+    private javax.swing.JLabel numeroAsiento11;
+    private javax.swing.JLabel numeroAsiento12;
+    private javax.swing.JLabel numeroAsiento13;
+    private javax.swing.JLabel numeroAsiento14;
+    private javax.swing.JLabel numeroAsiento15;
+    private javax.swing.JLabel numeroAsiento16;
+    private javax.swing.JLabel numeroAsiento17;
+    private javax.swing.JLabel numeroAsiento18;
+    private javax.swing.JLabel numeroAsiento19;
+    private javax.swing.JLabel numeroAsiento20;
+    private javax.swing.JLabel numeroAsiento21;
+    private javax.swing.JLabel numeroAsiento22;
+    private javax.swing.JLabel numeroAsiento23;
+    private javax.swing.JLabel numeroAsiento5;
+    private javax.swing.JLabel numeroAsiento6;
+    private javax.swing.JLabel numeroAsiento7;
+    private javax.swing.JLabel numeroAsiento8;
+    private javax.swing.JLabel numeroAsiento9;
+    private javax.swing.JLabel numeroAsientoCuatro;
+    private javax.swing.JLabel numeroAsientoDos;
+    private javax.swing.JLabel numeroAsientoSeis;
+    private javax.swing.JLabel numeroAsientoTres;
+    private javax.swing.JLabel numeroAsientoUno;
+    private javax.swing.JTextArea resumenTextArea;
+    // End of variables declaration//GEN-END:variables
 
 }

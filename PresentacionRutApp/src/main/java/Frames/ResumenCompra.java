@@ -28,15 +28,11 @@ public class ResumenCompra extends javax.swing.JFrame {
 
     private List<AsientosDisponibles.AsientoAsignado> asientosAsignados;
 
-     
-
-   
-
     /**
      * Creates new form ComprarViaje
      */
     public ResumenCompra() {
-
+        initComponents();
         setTitle("Resumen de Compra");
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
